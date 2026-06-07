@@ -27,3 +27,5 @@ Thumbs.db
 # PHPUnit
 .phpunit.result.cache
 /coverage/
+/public_html/assets/uploads/*
+!/public_html/assets/uploads/.gitkeep
