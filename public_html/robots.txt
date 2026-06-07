@@ -1,0 +1,11 @@
+User-agent: *
+Allow: /
+Disallow: /panel
+Disallow: /admin
+Disallow: /odeme
+Disallow: /giris
+Disallow: /kayit
+Disallow: /sifremi-unuttum
+Disallow: /sifre-sifirla
+
+Sitemap: https://punchyazilim.com/sitemap.xml

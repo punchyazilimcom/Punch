@@ -74,6 +74,7 @@ $router->group('/panel', [AuthMiddleware::class], function (Router $r) {
     $r->get('/destek', 'App\Controllers\Panel\TicketController@index');
     $r->get('/destek/yeni', 'App\Controllers\Panel\TicketController@create');
     $r->post('/destek/yeni', 'App\Controllers\Panel\TicketController@store');
+    $r->get('/destek/ek/{id}', 'App\Controllers\Panel\TicketController@attachment');
     $r->get('/destek/{id}', 'App\Controllers\Panel\TicketController@show');
     $r->post('/destek/{id}/yanit', 'App\Controllers\Panel\TicketController@reply');
 
@@ -116,6 +117,7 @@ $router->group('/admin', [AdminMiddleware::class], function (Router $r) {
     $r->post('/teklifler/{id}', 'App\Controllers\Admin\QuoteController@update');
 
     $r->get('/destek', 'App\Controllers\Admin\TicketController@index');
+    $r->get('/destek/ek/{id}', 'App\Controllers\Admin\TicketController@attachment');
     $r->get('/destek/{id}', 'App\Controllers\Admin\TicketController@show');
     $r->post('/destek/{id}/yanit', 'App\Controllers\Admin\TicketController@reply');
     $r->post('/destek/{id}/durum', 'App\Controllers\Admin\TicketController@updateStatus');

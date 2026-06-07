@@ -84,5 +84,6 @@ $verification = setting('google_site_verification', $analytics['site_verificatio
     <script defer src="<?= asset('js/hero.js') ?>"></script>
     <?php endif; ?>
     <?= $pageScripts ?? '' ?>
+    <?= $__view->section('scripts') ?>
 </body>
 </html>

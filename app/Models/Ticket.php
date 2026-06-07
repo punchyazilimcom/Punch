@@ -37,4 +37,21 @@ class Ticket extends Model
     {
         return $this->count("status = 'open'");
     }
+
+    public function addMessage(int $ticketId, string $senderType, int $senderId, string $message, ?string $attachment = null, bool $internal = false): int
+    {
+        return $this->db()->insert('ticket_messages', [
+            'ticket_id'        => $ticketId,
+            'sender_type'      => $senderType,
+            'sender_id'        => $senderId,
+            'message'          => $message,
+            'attachment_path'  => $attachment,
+            'is_internal_note' => $internal ? 1 : 0,
+        ]);
+    }
+
+    public function touch(int $ticketId, string $status): void
+    {
+        $this->update($ticketId, ['status' => $status, 'updated_at' => date('Y-m-d H:i:s')]);
+    }
 }

@@ -36,6 +36,61 @@ if (!function_exists('setting_json')) {
     }
 }
 
+if (!function_exists('status_badge')) {
+    /** Durum kodunu renkli rozet + Turkce etikete cevirir. */
+    function status_badge(string $status): string
+    {
+        $map = [
+            'paid'     => ['badge-success', 'Odendi'],
+            'pending'  => ['badge-warning', 'Bekliyor'],
+            'failed'   => ['badge-danger', 'Basarisiz'],
+            'refunded' => ['badge-muted', 'Iade'],
+            'unpaid'   => ['badge-warning', 'Odenmedi'],
+            'open'     => ['badge-info', 'Acik'],
+            'answered' => ['badge-success', 'Yanitlandi'],
+            'closed'   => ['badge-muted', 'Kapali'],
+            'new'      => ['badge-info', 'Yeni'],
+            'quoted'   => ['badge-warning', 'Teklif Verildi'],
+            'accepted' => ['badge-success', 'Kabul Edildi'],
+            'rejected' => ['badge-danger', 'Reddedildi'],
+            'active'   => ['badge-success', 'Aktif'],
+            'passive'  => ['badge-muted', 'Pasif'],
+            'draft'    => ['badge-muted', 'Taslak'],
+            'published'=> ['badge-success', 'Yayinda'],
+            'scheduled'=> ['badge-warning', 'Zamanlanmis'],
+            'high'     => ['badge-danger', 'Yuksek'],
+            'normal'   => ['badge-info', 'Normal'],
+            'low'      => ['badge-muted', 'Dusuk'],
+        ];
+        [$class, $label] = $map[$status] ?? ['badge-muted', $status];
+        return '<span class="badge ' . $class . '">' . e($label) . '</span>';
+    }
+}
+
+if (!function_exists('field_error')) {
+    /** Validasyon hatasini gosterir (ilk erisimde session'dan alip temizler). */
+    function field_error(string $key): string
+    {
+        static $errors = null;
+        if ($errors === null) {
+            $errors = $_SESSION['_errors'] ?? [];
+            unset($_SESSION['_errors']);
+        }
+        if (empty($errors[$key])) {
+            return '';
+        }
+        return '<span class="form-error">' . e($errors[$key]) . '</span>';
+    }
+}
+
+if (!function_exists('has_error')) {
+    function has_error(string $key): string
+    {
+        $errors = $_SESSION['_errors'] ?? [];
+        return isset($errors[$key]) ? ' input-invalid' : '';
+    }
+}
+
 if (!function_exists('is_active_path')) {
     /** Mevcut yol verilen prefix ile basliyorsa aria-current dondurur. */
     function is_active_path(string $prefix): string

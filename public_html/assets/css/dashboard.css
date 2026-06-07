@@ -1,0 +1,78 @@
+/* ============================================================
+   PUNCH YAZILIM — Panel & Admin dashboard stilleri
+   ============================================================ */
+
+.dash { display: grid; grid-template-columns: 264px 1fr; min-height: 100svh; }
+
+.dash-sidebar {
+  background: var(--bg-0);
+  border-right: 1px solid var(--line-1);
+  padding: var(--sp-5);
+  position: sticky; top: 0; height: 100svh;
+  display: flex; flex-direction: column;
+  overflow-y: auto;
+}
+.dash-sidebar .brand { margin-bottom: var(--sp-8); }
+.dash-nav { display: flex; flex-direction: column; gap: 4px; flex: 1; }
+.dash-nav a {
+  display: flex; align-items: center; gap: var(--sp-3);
+  padding: 0.7rem 0.9rem; border-radius: var(--r-md);
+  color: var(--text-2); font-size: var(--fs-sm); font-weight: 500;
+  transition: background var(--dur-fast), color var(--dur-fast);
+}
+.dash-nav a:hover { background: rgba(255,255,255,0.04); color: var(--text-1); }
+.dash-nav a[aria-current="page"] { background: rgba(124,58,237,0.16); color: #fff; }
+.dash-nav a svg { width: 18px; height: 18px; flex-shrink: 0; }
+.dash-nav .nav-sep { font-size: var(--fs-xs); text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-3); padding: var(--sp-4) 0.9rem var(--sp-2); }
+
+.dash-main { padding: var(--sp-6) clamp(1rem, 3vw, var(--sp-8)); min-width: 0; }
+.dash-topbar { display: flex; justify-content: space-between; align-items: center; gap: var(--sp-4); margin-bottom: var(--sp-6); flex-wrap: wrap; }
+.dash-topbar h1 { font-size: var(--fs-xl); }
+
+.kpi-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: var(--sp-4); margin-bottom: var(--sp-6); }
+.kpi { padding: var(--sp-5); }
+.kpi .kpi-label { color: var(--text-3); font-size: var(--fs-xs); text-transform: uppercase; letter-spacing: 0.08em; }
+.kpi .kpi-value { font-family: var(--font-display); font-size: var(--fs-2xl); color: var(--text-1); margin-top: var(--sp-2); }
+.kpi .kpi-icon { float: right; color: var(--punch-violet-400); opacity: 0.7; }
+
+/* Tablolar */
+.table-wrap { overflow-x: auto; border-radius: var(--r-lg); border: 1px solid var(--line-1); }
+table.data { width: 100%; border-collapse: collapse; font-size: var(--fs-sm); }
+table.data th { text-align: left; padding: var(--sp-4); background: var(--bg-2); color: var(--text-3); font-weight: 600; font-size: var(--fs-xs); text-transform: uppercase; letter-spacing: 0.06em; white-space: nowrap; }
+table.data td { padding: var(--sp-4); border-top: 1px solid var(--line-1); color: var(--text-2); vertical-align: middle; }
+table.data tr:hover td { background: rgba(255,255,255,0.02); }
+table.data a { color: var(--punch-violet-300); }
+
+.dash-section-title { font-size: var(--fs-lg); margin: var(--sp-6) 0 var(--sp-4); }
+
+/* Mobil sidebar */
+.dash-toggle { display: none; }
+@media (max-width: 920px) {
+  .dash { grid-template-columns: 1fr; }
+  .dash-sidebar { position: fixed; left: 0; top: 0; z-index: var(--z-modal); width: 264px; transform: translateX(-100%); transition: transform var(--dur-base) var(--ease-out); }
+  body.dash-open .dash-sidebar { transform: translateX(0); }
+  .dash-toggle { display: inline-flex; }
+  .dash-backdrop { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.6); z-index: 999; }
+  body.dash-open .dash-backdrop { display: block; }
+}
+
+/* Ticket thread */
+.thread { display: flex; flex-direction: column; gap: var(--sp-4); }
+.msg { padding: var(--sp-4) var(--sp-5); border-radius: var(--r-md); max-width: 80%; }
+.msg.user { background: rgba(124,58,237,0.14); align-self: flex-end; border: 1px solid var(--line-glow); }
+.msg.admin { background: var(--bg-2); align-self: flex-start; border: 1px solid var(--line-1); }
+.msg.note { background: rgba(245,158,11,0.1); border: 1px solid rgba(245,158,11,0.3); align-self: flex-start; }
+.msg .msg-meta { font-size: var(--fs-xs); color: var(--text-3); margin-bottom: var(--sp-2); }
+
+/* Mini bar chart (saf CSS) */
+.bars { display: flex; align-items: flex-end; gap: 8px; height: 160px; padding-top: var(--sp-4); }
+.bars .bar { flex: 1; background: var(--grad-primary); border-radius: 6px 6px 0 0; min-height: 4px; position: relative; transition: opacity var(--dur-fast); }
+.bars .bar:hover { opacity: 0.8; }
+.bars .bar span { position: absolute; bottom: -22px; left: 0; right: 0; text-align: center; font-size: 10px; color: var(--text-3); }
+
+.empty-state { text-align: center; padding: var(--sp-10); color: var(--text-3); }
+.empty-state svg { opacity: 0.4; margin-bottom: var(--sp-4); }
+
+/* Form grid (admin) */
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: var(--sp-4); }
+@media (max-width: 640px) { .form-row { grid-template-columns: 1fr; } }
