@@ -49,6 +49,7 @@ $verification = setting('google_site_verification', $analytics['site_verificatio
     <link rel="stylesheet" href="<?= asset('css/base.css') ?>">
     <link rel="stylesheet" href="<?= asset('css/components.css') ?>">
     <link rel="stylesheet" href="<?= asset('css/effects.css') ?>">
+    <link rel="stylesheet" href="<?= asset('css/cosmos.css') ?>">
     <link rel="stylesheet" href="<?= asset('css/utilities.css') ?>">
 
     <!-- JS yoksa animasyon baslangic durumlari icerigi gizlemesin -->
@@ -76,6 +77,7 @@ $verification = setting('google_site_verification', $analytics['site_verificatio
         </div>
     </div>
     <div class="scroll-progress" aria-hidden="true"></div>
+    <canvas class="warp-streaks" aria-hidden="true"></canvas>
     <a class="skip-link" href="#main">Icerige gec</a>
     <?= $__view->partial('partials/header') ?>
 

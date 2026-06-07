@@ -260,11 +260,110 @@
     els.forEach((el) => io.observe(el));
   }
 
+  /* -------- Kuyruklu yildiz imleci izi (kozmik) -------- */
+  function initCometTrail() {
+    if (reduceMotion || window.matchMedia('(pointer: coarse)').matches) return;
+    const cv = document.createElement('canvas');
+    cv.id = 'comet-trail';
+    document.body.appendChild(cv);
+    const ctx = cv.getContext('2d');
+    let w, h, dpr;
+    const resize = () => {
+      dpr = Math.min(window.devicePixelRatio || 1, 2);
+      w = innerWidth; h = innerHeight; cv.width = w * dpr; cv.height = h * dpr;
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    };
+    resize();
+    addEventListener('resize', resize);
+
+    const COL = ['223,231,255', '173,132,247', '54,224,214', '255,95,209'];
+    const parts = [];
+    let mx = -99, my = -99, pmx = -99, pmy = -99;
+    addEventListener('mousemove', (e) => { mx = e.clientX; my = e.clientY; }, { passive: true });
+
+    (function loop() {
+      ctx.clearRect(0, 0, w, h);
+      if (pmx >= 0) {
+        const d = Math.hypot(mx - pmx, my - pmy);
+        const n = Math.min(4, Math.floor(d / 6));
+        for (let i = 0; i < n; i++) {
+          parts.push({
+            x: mx, y: my,
+            vx: (Math.random() - 0.5) * 0.8, vy: (Math.random() - 0.5) * 0.8 + 0.3,
+            life: 1, r: Math.random() * 2 + 0.6, col: COL[(Math.random() * COL.length) | 0],
+          });
+        }
+      }
+      pmx = mx; pmy = my;
+      ctx.globalCompositeOperation = 'lighter';
+      for (let i = parts.length - 1; i >= 0; i--) {
+        const p = parts[i];
+        p.x += p.vx; p.y += p.vy; p.life -= 0.035;
+        if (p.life <= 0) { parts.splice(i, 1); continue; }
+        ctx.beginPath();
+        ctx.arc(p.x, p.y, p.r * p.life, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(${p.col},${p.life * 0.8})`;
+        ctx.fill();
+      }
+      ctx.globalCompositeOperation = 'source-over';
+      requestAnimationFrame(loop);
+    })();
+  }
+
+  /* -------- Warp: hizli scroll'da yildiz cizgileri -------- */
+  function initWarp() {
+    if (reduceMotion) return;
+    const streaks = document.querySelector('.warp-streaks');
+    if (!streaks) return;
+    const ctx = streaks.getContext ? streaks.getContext('2d') : null;
+    let w, h, dpr, last = window.scrollY, vel = 0, raf = null;
+    const resize = () => {
+      dpr = Math.min(window.devicePixelRatio || 1, 2);
+      w = innerWidth; h = innerHeight; streaks.width = w * dpr; streaks.height = h * dpr;
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    };
+    if (!ctx) return;
+    resize(); addEventListener('resize', resize);
+
+    const draw = () => {
+      ctx.clearRect(0, 0, w, h);
+      const cx = w / 2, cy = h / 2;
+      const intensity = Math.min(1, Math.abs(vel) / 45);
+      if (intensity > 0.05) {
+        document.body.classList.add('warping');
+        ctx.globalCompositeOperation = 'lighter';
+        const lines = 40;
+        for (let i = 0; i < lines; i++) {
+          const ang = Math.random() * Math.PI * 2;
+          const r0 = 60 + Math.random() * 120;
+          const len = 30 + intensity * 220 * Math.random();
+          const x0 = cx + Math.cos(ang) * r0, y0 = cy + Math.sin(ang) * r0;
+          const x1 = cx + Math.cos(ang) * (r0 + len), y1 = cy + Math.sin(ang) * (r0 + len);
+          ctx.strokeStyle = `rgba(200,210,255,${0.08 * intensity})`;
+          ctx.lineWidth = 1.2;
+          ctx.beginPath(); ctx.moveTo(x0, y0); ctx.lineTo(x1, y1); ctx.stroke();
+        }
+        ctx.globalCompositeOperation = 'source-over';
+      } else {
+        document.body.classList.remove('warping');
+      }
+      vel *= 0.82;
+      raf = Math.abs(vel) > 0.5 ? requestAnimationFrame(draw) : null;
+      if (!raf) { ctx.clearRect(0, 0, w, h); document.body.classList.remove('warping'); }
+    };
+    addEventListener('scroll', () => {
+      vel = window.scrollY - last; last = window.scrollY;
+      if (!raf) raf = requestAnimationFrame(draw);
+    }, { passive: true });
+  }
+
   ready(function () {
     initPreloader();
     initHeader();
     initLenis();
     initCursor();
+    initCometTrail();
+    initWarp();
     initMagnetic();
     initTilt();
     initScrollAnimations();

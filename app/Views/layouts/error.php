@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="<?= asset('css/base.css') ?>">
     <link rel="stylesheet" href="<?= asset('css/components.css') ?>">
     <link rel="stylesheet" href="<?= asset('css/effects.css') ?>">
+    <link rel="stylesheet" href="<?= asset('css/cosmos.css') ?>">
     <link rel="stylesheet" href="<?= asset('css/utilities.css') ?>">
 </head>
 <body>

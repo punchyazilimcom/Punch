@@ -7,6 +7,14 @@ $v = $__view;
     <canvas id="hero-canvas" aria-hidden="true"></canvas>
     <div class="aurora" aria-hidden="true"><span></span><span></span><span></span></div>
     <div class="grid-lines" aria-hidden="true"></div>
+    <!-- Boyutsal portal -->
+    <div class="portal" aria-hidden="true"><span class="ring"></span><span class="ring"></span></div>
+    <!-- Yorungedeki gezegenler -->
+    <div class="orbit-system" aria-hidden="true">
+        <div class="orbit o1"><span class="planet"></span></div>
+        <div class="orbit o2"><span class="planet"></span></div>
+        <div class="orbit o3"><span class="planet"></span></div>
+    </div>
     <div class="hero-orb hero-orb-1"></div>
     <div class="hero-orb hero-orb-2"></div>
     <div class="container">
@@ -18,8 +26,8 @@ $v = $__view;
                 $words = preg_split('/\s+/', $title);
                 $mid = (int) floor(count($words) / 2);
                 foreach ($words as $i => $word):
-                    // Son kelimeyi animasyonlu gradient ile vurgula
-                    $cls = ($i >= count($words) - 2) ? 'text-gradient-anim' : '';
+                    // Son iki kelimeyi holografik vurgu ile one cikar
+                    $cls = ($i >= count($words) - 2) ? 'holo' : '';
                 ?>
                 <span class="reveal-word"><span class="<?= $cls ?>"><?= e($word) ?></span></span>
                 <?php endforeach; ?>
