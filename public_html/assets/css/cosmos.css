@@ -134,3 +134,22 @@ body.warping .warp-streaks { opacity: 1; }
   .portal::before, .portal::after, .portal .ring, .orbit, .holo, .float-slow { animation: none !important; }
   .warp-streaks { display: none !important; }
 }
+
+/* ---------- WebGL nebula (hero en arka katman) ---------- */
+.hero #nebula-gl {
+  position: absolute; inset: 0; z-index: -2;
+  width: 100%; height: 100%; display: block;
+  image-rendering: auto;
+}
+/* GL aktifken 2D hero canvas'i biraz seffaflastir (cift nebula olmasin) */
+.hero #hero-canvas { mix-blend-mode: screen; }
+
+/* ---------- 3D gezegen bolumu ---------- */
+.cosmic-planet { position: relative; }
+#planet-canvas { width: 100%; aspect-ratio: 1; max-width: 460px; margin-inline: auto; display: block; }
+.cosmic-planet .planet-wrap { position: relative; }
+.cosmic-planet .planet-wrap::after {
+  content: ''; position: absolute; inset: -10% ; z-index: -1;
+  background: radial-gradient(circle, rgba(124,58,237,0.18), transparent 60%);
+  filter: blur(30px);
+}

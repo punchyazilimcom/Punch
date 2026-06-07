@@ -94,7 +94,9 @@ $verification = setting('google_site_verification', $analytics['site_verificatio
     <script defer src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
     <script defer src="<?= asset('js/app.js') ?>"></script>
     <?php if (!empty($heroCanvas)): ?>
+    <script defer src="<?= asset('js/cosmos-gl.js') ?>"></script>
     <script defer src="<?= asset('js/hero.js') ?>"></script>
+    <script defer src="<?= asset('js/planet.js') ?>"></script>
     <?php endif; ?>
     <?= $pageScripts ?? '' ?>
     <?= $__view->section('scripts') ?>

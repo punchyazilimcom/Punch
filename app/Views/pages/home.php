@@ -4,6 +4,7 @@ $v = $__view;
 ?>
 <!-- ============ HERO ============ -->
 <section class="hero">
+    <canvas id="nebula-gl" aria-hidden="true"></canvas>
     <canvas id="hero-canvas" aria-hidden="true"></canvas>
     <div class="aurora" aria-hidden="true"><span></span><span></span><span></span></div>
     <div class="grid-lines" aria-hidden="true"></div>
@@ -154,6 +155,27 @@ $v = $__view;
                 </div>
             </div>
             <?php endforeach; ?>
+        </div>
+    </div>
+</section>
+
+<!-- ============ KOZMIK / 3D GEZEGEN ============ -->
+<section class="section cosmic-planet">
+    <div class="starfield-bg" aria-hidden="true"></div>
+    <div class="container split">
+        <div class="planet-wrap float-slow" data-reveal>
+            <canvas id="planet-canvas" aria-hidden="true"></canvas>
+        </div>
+        <div data-reveal>
+            <span class="section-index">Sinirsiz olcek</span>
+            <h2 class="section-title mt-3">Markaniz icin <span class="holo">kendi evreni</span></h2>
+            <p class="section-lead">Kurduğumuz dijital altyapilar; bugunku ihtiyaciniza degil, yarinki buyumenize gore tasarlanir. Trafik artsa da, urun sayisi katlansa da sisteminiz sarsilmadan olceklenir.</p>
+            <ul class="feature-list mt-5" style="max-width:46ch">
+                <li><?= $v->partial('partials/icon', ['name' => 'zap', 'size' => 18]) ?> <span>Saniyenin altinda acilan, CDN destekli hizli altyapi</span></li>
+                <li><?= $v->partial('partials/icon', ['name' => 'shield', 'size' => 18]) ?> <span>Kurumsal seviye guvenlik ve KVKK uyumu</span></li>
+                <li><?= $v->partial('partials/icon', ['name' => 'rocket', 'size' => 18]) ?> <span>Buyumeye hazir, modulleri eklenebilir mimari</span></li>
+            </ul>
+            <a href="/iletisim" class="btn mt-6" data-magnetic="0.25">Yolculuga Baslayin <?= $v->partial('partials/icon', ['name' => 'arrow-right', 'size' => 18]) ?></a>
         </div>
     </div>
 </section>
