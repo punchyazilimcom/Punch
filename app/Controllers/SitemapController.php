@@ -33,11 +33,12 @@ class SitemapController
         $add('/hakkimizda', null, 'yearly', '0.5');
         $add('/blog', null, 'daily', '0.8');
         $add('/iletisim', null, 'yearly', '0.6');
+        $add('/on-bilgilendirme-formu', null, 'yearly', '0.3');
+        $add('/mesafeli-satis-sozlesmesi', null, 'yearly', '0.3');
+        $add('/teslimat-ve-iade', null, 'yearly', '0.3');
         $add('/kvkk', null, 'yearly', '0.3');
         $add('/gizlilik-politikasi', null, 'yearly', '0.3');
-        $add('/mesafeli-satis-sozlesmesi', null, 'yearly', '0.3');
         $add('/cerez-politikasi', null, 'yearly', '0.3');
-        $add('/teslimat-ve-iade', null, 'yearly', '0.3');
 
         try {
             foreach ((new Service())->active() as $s) {

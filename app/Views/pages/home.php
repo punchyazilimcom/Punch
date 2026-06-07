@@ -5,6 +5,8 @@ $v = $__view;
 <!-- ============ HERO ============ -->
 <section class="hero">
     <canvas id="hero-canvas" aria-hidden="true"></canvas>
+    <div class="aurora" aria-hidden="true"><span></span><span></span><span></span></div>
+    <div class="grid-lines" aria-hidden="true"></div>
     <div class="hero-orb hero-orb-1"></div>
     <div class="hero-orb hero-orb-2"></div>
     <div class="container">
@@ -13,15 +15,24 @@ $v = $__view;
             <h1 data-split>
                 <?php
                 $title = setting('hero_title', 'Dijitalde fark yaratan deneyimler tasarliyoruz');
-                foreach (preg_split('/\s+/', $title) as $word):
+                $words = preg_split('/\s+/', $title);
+                $mid = (int) floor(count($words) / 2);
+                foreach ($words as $i => $word):
+                    // Son kelimeyi animasyonlu gradient ile vurgula
+                    $cls = ($i >= count($words) - 2) ? 'text-gradient-anim' : '';
                 ?>
-                <span class="reveal-word"><span><?= e($word) ?></span></span>
+                <span class="reveal-word"><span class="<?= $cls ?>"><?= e($word) ?></span></span>
                 <?php endforeach; ?>
             </h1>
             <p class="hero-lead" data-hero-fade><?= e(setting('hero_subtitle', 'Web tasarim, e-ticaret, sosyal medya ve ozel yazilim. Markanizi hizli, guvenli ve etkileyici dijital cozumlerle buyutuyoruz.')) ?></p>
             <div class="hero-cta" data-hero-fade>
-                <a href="/paketler" class="btn btn-lg" data-magnetic="0.3">Paketleri Kesfet <?= $v->partial('partials/icon', ['name' => 'arrow-right', 'size' => 18]) ?></a>
-                <a href="/iletisim" class="btn btn-ghost btn-lg">Teklif Al</a>
+                <a href="/paketler" class="btn btn-lg btn-glow" data-magnetic="0.3">Paketleri Kesfet <?= $v->partial('partials/icon', ['name' => 'arrow-right', 'size' => 18]) ?></a>
+                <a href="/iletisim" class="btn btn-ghost btn-lg" data-magnetic="0.2">Ucretsiz Strateji Gorusmesi</a>
+            </div>
+            <div class="hero-cta" data-hero-fade style="margin-top:var(--sp-6);gap:var(--sp-3)">
+                <span class="tech-pill"><?= $v->partial('partials/icon', ['name' => 'shield', 'size' => 16]) ?> SSL & KVKK uyumlu</span>
+                <span class="tech-pill"><?= $v->partial('partials/icon', ['name' => 'zap', 'size' => 16]) ?> 90+ Lighthouse hedefi</span>
+                <span class="tech-pill"><?= $v->partial('partials/icon', ['name' => 'credit-card', 'size' => 16]) ?> Guvenli PayTR odeme</span>
             </div>
         </div>
     </div>
@@ -85,7 +96,7 @@ $v = $__view;
         </header>
         <div class="pricing-grid">
             <?php foreach ($packages as $pkg): $features = Package::features($pkg); ?>
-            <article class="card pricing-card<?= !empty($pkg['is_popular']) ? ' is-popular' : '' ?>" data-reveal>
+            <article class="card pricing-card<?= !empty($pkg['is_popular']) ? ' is-popular glow-border' : '' ?>" data-reveal>
                 <?php if (!empty($pkg['is_popular'])): ?><span class="pricing-badge">Populer</span><?php endif; ?>
                 <div class="feature-icon"><?= $v->partial('partials/icon', ['name' => $pkg['icon'] ?: 'package']) ?></div>
                 <h3><?= e($pkg['title']) ?></h3>
@@ -121,10 +132,10 @@ $v = $__view;
         <div class="steps">
             <?php
             $steps = [
-                ['Kesif & Strateji', 'Hedeflerinizi, hedef kitlenizi ve rakiplerinizi analiz ederiz.'],
-                ['Tasarim', 'Markaniza ozel, donusum odakli arayuzler tasarlariz.'],
-                ['Gelistirme', 'Hizli, guvenli ve SEO uyumlu kodlama ile hayata geceririz.'],
-                ['Yayin & Buyume', 'Yayinlar, olcer ve surekli iyilestirmelerle buyutaruz.'],
+                ['Kesif & Strateji', 'Hedeflerinizi, hedef kitlenizi ve rakiplerinizi dinler; projeyi olculebilir is hedeflerine baglayan net bir yol haritasi cikaririz.'],
+                ['Tasarim', 'Markanizin ruhunu yansitan, ziyaretciyi aksiyona yonlendiren ozel arayuzler tasarlar; onayinizi adim adim aliriz.'],
+                ['Gelistirme', 'Hizli, guvenli ve SEO uyumlu kodlama ile tasarimi hayata geciririz; her cihazda ve her tarayicida titizlikle test ederiz.'],
+                ['Yayin & Buyume', 'Siteyi yayina alir, analitigi kurar; verilerle olcup surekli iyilestirerek markanizi buyutmeye devam ederiz.'],
             ];
             foreach ($steps as $i => $step): ?>
             <div class="step card" data-reveal>
@@ -152,8 +163,8 @@ $v = $__view;
         </header>
         <div class="work-grid">
             <?php foreach ($works as $work): ?>
-            <a href="/portfolyo/<?= e($work['slug']) ?>" class="work-card" data-reveal>
-                <div class="work-media"></div>
+            <a href="/portfolyo/<?= e($work['slug']) ?>" class="work-card tilt-shine" data-reveal>
+                <div class="work-media" data-reveal-mask></div>
                 <div class="work-meta">
                     <span class="work-cat"><?= e($work['category']) ?></span>
                     <h3><?= e($work['title']) ?></h3>

@@ -48,6 +48,7 @@ $verification = setting('google_site_verification', $analytics['site_verificatio
     <link rel="stylesheet" href="<?= asset('css/tokens.css') ?>">
     <link rel="stylesheet" href="<?= asset('css/base.css') ?>">
     <link rel="stylesheet" href="<?= asset('css/components.css') ?>">
+    <link rel="stylesheet" href="<?= asset('css/effects.css') ?>">
     <link rel="stylesheet" href="<?= asset('css/utilities.css') ?>">
 
     <!-- JS yoksa animasyon baslangic durumlari icerigi gizlemesin -->
@@ -67,7 +68,14 @@ $verification = setting('google_site_verification', $analytics['site_verificatio
     <script>gtag('js', new Date()); gtag('config', '<?= e($ga4) ?>');</script>
     <?php endif; ?>
 </head>
-<body class="<?= e($bodyClass) ?>">
+<body class="<?= e($bodyClass) ?> loading">
+    <div class="preloader" aria-hidden="true">
+        <div class="text-center">
+            <div class="preloader-mark">Punch<span style="opacity:.6">.</span></div>
+            <div class="preloader-bar mx-auto"></div>
+        </div>
+    </div>
+    <div class="scroll-progress" aria-hidden="true"></div>
     <a class="skip-link" href="#main">Icerige gec</a>
     <?= $__view->partial('partials/header') ?>
 

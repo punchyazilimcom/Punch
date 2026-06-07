@@ -16,8 +16,8 @@
         </div>
         <div class="work-grid">
             <?php foreach ($works as $work): ?>
-            <a href="/portfolyo/<?= e($work['slug']) ?>" class="work-card" data-reveal data-cat="<?= e($work['category']) ?>">
-                <div class="work-media"></div>
+            <a href="/portfolyo/<?= e($work['slug']) ?>" class="work-card tilt-shine" data-reveal data-cat="<?= e($work['category']) ?>">
+                <div class="work-media" data-reveal-mask></div>
                 <div class="work-meta">
                     <span class="work-cat"><?= e($work['category']) ?></span>
                     <h3><?= e($work['title']) ?></h3>

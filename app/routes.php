@@ -34,12 +34,13 @@ $router->post('/iletisim', 'App\Controllers\ContactController@store');
 // Teklif iste (sosyal medya vb.)
 $router->post('/teklif-iste', 'App\Controllers\QuoteRequestController@store');
 
-// Hukuki sayfalar
-$router->get('/kvkk', 'App\Controllers\PageController@legal', );
-$router->get('/gizlilik-politikasi', 'App\Controllers\PageController@legal');
+// Hukuki sayfalar & sozlesmeler
+$router->get('/on-bilgilendirme-formu', 'App\Controllers\PageController@legal');
 $router->get('/mesafeli-satis-sozlesmesi', 'App\Controllers\PageController@legal');
-$router->get('/cerez-politikasi', 'App\Controllers\PageController@legal');
 $router->get('/teslimat-ve-iade', 'App\Controllers\PageController@legal');
+$router->get('/kvkk', 'App\Controllers\PageController@legal');
+$router->get('/gizlilik-politikasi', 'App\Controllers\PageController@legal');
+$router->get('/cerez-politikasi', 'App\Controllers\PageController@legal');
 
 // SEO
 $router->get('/sitemap.xml', 'App\Controllers\SitemapController@xml');

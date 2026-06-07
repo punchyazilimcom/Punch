@@ -21,25 +21,25 @@ ON DUPLICATE KEY UPDATE email = email;
 -- --- Paketler ---
 INSERT INTO `packages` (`slug`, `title`, `short_desc`, `description`, `features_json`, `price`, `currency`, `is_quote_only`, `is_popular`, `icon`, `is_active`, `sort_order`, `meta_title`, `meta_description`) VALUES
 ('kurumsal-web-site', 'Kurumsal Web Site',
- 'Markaniza ozel, hizli ve SEO uyumlu kurumsal web sitesi.',
- 'Isletmenizi internette en iyi sekilde temsil eden, mobil uyumlu, hizli yuklenen ve arama motorlarinda one cikan ozel tasarim kurumsal web sitesi. Yonetim paneli ile icerigi kendiniz guncelleyebilirsiniz.',
- '["Ozel tasarim (template degil)","Mobil & tablet uyumlu","Teknik SEO altyapisi","Yonetim paneli (CMS)","SSL sertifikasi & guvenlik","Iletisim formu & harita","Google Analytics entegrasyonu","1 yil teknik destek"]',
+ 'Markanizi ilk saniyede anlatan; hizli, sik ve Google dostu ozel tasarim kurumsal site.',
+ 'Isletmenizi dijitalde en guclu sekilde temsil eden, tamamen size ozel tasarlanan kurumsal web sitesi. Ziyaretciyi musteriye ceviren akici bir deneyim, saniyenin altinda acilan sayfalar ve arama motorlarinda one cikaran teknik SEO altyapisi bir arada. Yonetim paneli sayesinde icerigi, gorselleri ve metinleri teknik bilgi gerektirmeden kendiniz guncellersiniz. Teslimde site canli, hizli ve buyumeye hazirdir.',
+ '["Markaniza ozel tasarim (hazir tema degil)","Mobil, tablet ve masaustu tam uyum","Teknik SEO altyapisi (hiz, sitemap, schema)","Kolay yonetim paneli (CMS)","Ucretsiz SSL & guvenlik onlemleri","Iletisim formu, harita ve WhatsApp entegrasyonu","Google Analytics & Search Console kurulumu","2 tur ucretsiz revizyon","1 yil teknik destek"]',
  24900.00, 'TRY', 0, 1, 'layout', 1, 1,
  'Kurumsal Web Site Tasarimi | Punch Yazilim Ankara',
  'Ankara kurumsal web site tasarimi. Ozel tasarim, SEO uyumlu, hizli ve mobil uyumlu profesyonel web siteleri.'),
 
 ('e-ticaret', 'E-Ticaret Sitesi',
- 'Satislarinizi buyutecek, guvenli ve olceklenebilir e-ticaret altyapisi.',
- 'Urun yonetimi, sepet, uyelik, sanal POS & PayTR entegrasyonu, kargo ve kampanya yonetimi ile tam donanimli e-ticaret cozumu. Pazaryeri entegrasyonlarina hazir mimari.',
- '["Sinirsiz urun & kategori","Guvenli odeme (PayTR/Sanal POS)","Uyelik & sepet sistemi","Kampanya & kupon yonetimi","Kargo entegrasyonu","Stok & siparis yonetimi","Mobil uyumlu & hizli","SEO & pazaryeri hazir altyapi"]',
+ 'Satisa odakli, guvenli ve buyumeye hazir profesyonel e-ticaret altyapisi.',
+ 'Urunlerinizi en iyi sekilde sergileyen, ziyaretciyi adim adim satin almaya goturen tam donanimli e-ticaret platformu. PayTR & sanal POS ile 3D Secure guvenli odeme, uyelik ve sepet sistemi, kampanya ve kupon motoru, kargo ve stok yonetimi bir arada. Mobil oncelikli ve hizli yapisi sayesinde sepet terk oranini dusurur, donusumu artirir. Pazaryeri (Trendyol, Hepsiburada) entegrasyonlarina hazir mimari ile isletmenizle birlikte olceklenir.',
+ '["Sinirsiz urun, varyant & kategori","3D Secure guvenli odeme (PayTR / Sanal POS)","Uyelik, sepet & hizli odeme akisi","Kampanya, indirim & kupon yonetimi","Kargo entegrasyonu & otomatik takip","Stok, siparis & iade yonetimi","Mobil oncelikli, yuksek hizli altyapi","SEO uyumlu & pazaryerine hazir","Yonetim paneli & satis raporlari"]',
  49900.00, 'TRY', 0, 0, 'shopping-cart', 1, 2,
  'E-Ticaret Sitesi Kurulumu | Punch Yazilim',
  'Profesyonel e-ticaret sitesi kurulumu. PayTR & sanal POS entegrasyonu, urun yonetimi ve SEO uyumlu altyapi.'),
 
 ('sosyal-medya-yonetimi', 'Sosyal Medya Yonetimi',
- 'Markanizi buyuten, donusum odakli sosyal medya yonetimi.',
- 'Icerik uretimi, tasarim, reklam yonetimi ve topluluk yonetimi ile markanizi sosyal medyada guclu sekilde konumlandiriyoruz. Ihtiyaciniza ozel paket icin teklif alin.',
- '["Aylik icerik takvimi","Ozel grafik & video tasarim","Reklam (Meta/Google) yonetimi","Topluluk & mesaj yonetimi","Aylik performans raporu","Rakip & trend analizi"]',
+ 'Takipciyi musteriye ceviren, strateji ve reklam odakli sosyal medya yonetimi.',
+ 'Markanizi sosyal medyada sadece "gorunur" degil, "tercih edilir" kilan butuncul bir yonetim hizmeti. Hedef kitlenize ozel icerik stratejisi, dikkat ceken grafik ve video tasarimlari, dogru hedefli Meta & Google reklamlari ve hizli topluluk yonetimi ile etkilesimi gercek is sonuclarina donusturuyoruz. Her ay seffaf performans raporu ile nereye para harcandigini ve ne kazandirdigini net gorursunuz. Ihtiyaciniza ve sektorunuze gore fiyatlandirilir; size ozel teklif alin.',
+ '["Markaya ozel aylik icerik stratejisi & takvim","Profesyonel grafik & kisa video tasarimi","Meta (Instagram/Facebook) & Google reklam yonetimi","Topluluk, yorum & mesaj yonetimi","Aylik seffaf performans raporu","Rakip, trend & hedef kitle analizi"]',
  0.00, 'TRY', 1, 0, 'megaphone', 1, 3,
  'Sosyal Medya Yonetimi Ajansi | Punch Yazilim',
  'Ankara sosyal medya yonetimi. Icerik, tasarim ve reklam yonetimiyle markanizi buyutun. Size ozel teklif alin.')
@@ -106,10 +106,10 @@ ON DUPLICATE KEY UPDATE slug = slug;
 -- --- Ayarlar (site metinleri, sosyal, SEO, CMS) ---
 INSERT INTO `settings` (`setting_key`, `setting_value`) VALUES
 ('site_title', 'Punch Yazilim — Dijital Yazilim Ajansi'),
-('site_tagline', 'Markanizi dijitalde one cikaran yazilim ajansi'),
-('hero_eyebrow', 'Ankara · Dijital Yazilim Ajansi'),
-('hero_title', 'Dijitalde fark yaratan deneyimler tasarliyoruz'),
-('hero_subtitle', 'Web tasarim, e-ticaret, sosyal medya ve ozel yazilim. Markanizi hizli, guvenli ve etkileyici dijital cozumlerle buyutuyoruz.'),
+('site_tagline', 'Markanizi dijitalde one cikaran, sonuc ureten yazilim ajansi.'),
+('hero_eyebrow', 'Ankara · Dijital Yazilim & Tasarim Ajansi'),
+('hero_title', 'Markanizi dijitalde fark yaratan deneyimlere donusturuyoruz'),
+('hero_subtitle', 'Sablon degil, size ozel. Hizli yuklenen, Google''da one cikan ve satisa donusen web siteleri, e-ticaret altyapilari ve sosyal medya yonetimi. Stratejiden yayina kadar tek catida.'),
 ('contact_phone', ''),
 ('contact_whatsapp', ''),
 ('contact_email', 'destek@punchyazilim.com'),
@@ -124,6 +124,6 @@ INSERT INTO `settings` (`setting_key`, `setting_value`) VALUES
 ('ga4_id', ''),
 ('google_site_verification', ''),
 ('stats_json', '[{"value":"120+","label":"Tamamlanan Proje"},{"value":"8+","label":"Yil Tecrube"},{"value":"%98","label":"Musteri Memnuniyeti"},{"value":"24/7","label":"Teknik Destek"}]'),
-('testimonials_json', '[{"name":"Mehmet K.","company":"Nova Teknoloji","text":"Sitemiz hem cok hizli hem de inanilmaz sik oldu. Donusumlerimiz gozle gorulur arti.","rating":5},{"name":"Aylin D.","company":"Atlas Store","text":"E-ticaret altyapisi sorunsuz calisiyor, PayTR entegrasyonu kusursuz.","rating":5},{"name":"Caner T.","company":"Lumen Group","text":"Sosyal medya yonetimiyle etkilesimimiz katlandi. Profesyonel bir ekip.","rating":5}]'),
-('faq_json', '[{"q":"Bir web sitesi ne kadar surede teslim edilir?","a":"Kurumsal web siteleri genellikle 2-4 hafta icinde teslim edilir. Kapsam ve icerik hazirligina gore sure degisebilir."},{"q":"Odeme nasil yapiliyor?","a":"Sabit fiyatli paketlerde guvenli PayTR altyapisi ile online odeme yapabilirsiniz. Kurumsal projelerde asamali odeme sunariz."},{"q":"SEO calismasi dahil mi?","a":"Tum sitelerimiz teknik SEO altyapisiyla teslim edilir. Suregelen icerik/SEO calismalari icin ayrica paket sunariz."},{"q":"Site teslim sonrasi destek veriyor musunuz?","a":"Evet, tum kurumsal paketlerde 1 yil teknik destek dahildir. Sonrasinda bakim paketleri mevcuttur."}]')
+('testimonials_json', '[{"name":"Mehmet K.","company":"Nova Teknoloji · Kurucu","text":"Eski sitemiz yavas ve eskiydi. Punch ekibi 3 haftada hem pirilti gibi hem de cok hizli bir site teslim etti. Teklif formundan gelen talepler ilk aydan itibaren ikiye katlandi.","rating":5},{"name":"Aylin D.","company":"Atlas Store · E-ticaret Mudiru","text":"PayTR ve kargo entegrasyonu kusursuz calisiyor. Mobilde sayfa hizi cok iyi oldugu icin sepet terk oranimiz belirgin sekilde dustu. Panel kullanimi da cok kolay.","rating":5},{"name":"Caner T.","company":"Lumen Group · Pazarlama","text":"Sosyal medya yonetiminde icerik kalitesi ve raporlama seffafligi bizi etkiledi. 3 ayda etkilesimimiz %180 artti, gercek musteri talepleri gelmeye basladi.","rating":5}]'),
+('faq_json', '[{"q":"Bir web sitesi ne kadar surede teslim edilir?","a":"Kurumsal web siteleri, icerik ve gorseller tamamsa ortalama 2-4 hafta icinde yayina alinir. Surecin her asamasinda (tasarim onayi, gelistirme, test) bilgilendirilirsiniz; gizli surpriz yoktur."},{"q":"Odeme nasil yapiliyor, guvenli mi?","a":"Sabit fiyatli paketleri sitemizden PayTR 3D Secure altyapisi ile guvenle online satin alabilirsiniz. Kart bilgileriniz bizde saklanmaz. Daha buyuk kurumsal projelerde asamali odeme plani sunariz."},{"q":"Site sablon mu, yoksa size mi ozel?","a":"Hazir tema satmiyoruz. Her proje; marka kimliginize, hedef kitlenize ve is hedeflerinize gore sifirdan tasarlanir ve kodlanir. Boylece hem ozgun gorunur hem de hizli calisir."},{"q":"SEO ve Google siralamasi dahil mi?","a":"Tum sitelerimiz teknik SEO altyapisiyla (hizli yukleme, mobil uyum, yapilandirilmis veri, sitemap) teslim edilir. Surekli icerik ve SEO buyumesi icin ayrica aylik paketlerimiz vardir."},{"q":"Teslimden sonra destek aliyor muyum?","a":"Evet. Kurumsal paketlerde 1 yil teknik destek dahildir. Panelden 7/24 destek talebi acabilir, guncelleme ve bakim paketlerimizden yararlanabilirsiniz."},{"q":"Iceriklerimi kendim guncelleyebilir miyim?","a":"Elbette. Yonetim paneli (CMS) ile blog yazisi, gorsel, fiyat ve sayfa metinlerini teknik bilgi gerekmeden kolayca guncelleyebilirsiniz."}]')
 ON DUPLICATE KEY UPDATE setting_key = setting_key;

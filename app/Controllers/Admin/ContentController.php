@@ -24,11 +24,12 @@ class ContentController extends AdminController
             'testimonials' => $s->getJson('testimonials_json', []),
             'faqs'         => $s->getJson('faq_json', []),
             'legal'        => [
-                'kvkk'     => $s->get('legal_kvkk', ''),
-                'privacy'  => $s->get('legal_privacy', ''),
-                'sales'    => $s->get('legal_sales', ''),
-                'cookie'   => $s->get('legal_cookie', ''),
-                'delivery' => $s->get('legal_delivery', ''),
+                'preinfo'  => \App\Services\LegalText::get('legal_preinfo'),
+                'sales'    => \App\Services\LegalText::get('legal_sales'),
+                'delivery' => \App\Services\LegalText::get('legal_delivery'),
+                'kvkk'     => \App\Services\LegalText::get('legal_kvkk'),
+                'privacy'  => \App\Services\LegalText::get('legal_privacy'),
+                'cookie'   => \App\Services\LegalText::get('legal_cookie'),
             ],
         ]);
     }
@@ -68,13 +69,14 @@ class ContentController extends AdminController
         $faqs = $this->pairArrays($request->input('faq_q', []), $request->input('faq_a', []), ['q', 'a']);
         $s->set('faq_json', json_encode($faqs, JSON_UNESCAPED_UNICODE));
 
-        // Hukuki metinler (yonetici girisi HTML)
+        // Hukuki metinler & sozlesmeler (yonetici girisi HTML)
         $s->setMany([
+            'legal_preinfo'  => (string) $request->input('legal_preinfo', ''),
+            'legal_sales'    => (string) $request->input('legal_sales', ''),
+            'legal_delivery' => (string) $request->input('legal_delivery', ''),
             'legal_kvkk'     => (string) $request->input('legal_kvkk', ''),
             'legal_privacy'  => (string) $request->input('legal_privacy', ''),
-            'legal_sales'    => (string) $request->input('legal_sales', ''),
             'legal_cookie'   => (string) $request->input('legal_cookie', ''),
-            'legal_delivery' => (string) $request->input('legal_delivery', ''),
         ]);
 
         $this->audit('content.update');

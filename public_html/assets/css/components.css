@@ -318,3 +318,9 @@ textarea.form-control { min-height: 140px; resize: vertical; }
 .breadcrumb { display: flex; flex-wrap: wrap; gap: var(--sp-2); font-size: var(--fs-sm); color: var(--text-3); margin-bottom: var(--sp-5); }
 .breadcrumb a:hover { color: var(--punch-violet-300); }
 .breadcrumb span { opacity: 0.5; }
+
+/* ---------- Siparis ozeti & sozlesme onayi ---------- */
+.order-summary { background: rgba(255,255,255,0.03); border: 1px solid var(--line-1); border-radius: var(--r-md); padding: var(--sp-4); }
+.consent-row { display: flex; gap: var(--sp-3); align-items: flex-start; font-size: var(--fs-sm); color: var(--text-2); margin-top: var(--sp-3); cursor: pointer; }
+.consent-row input { margin-top: 4px; flex-shrink: 0; accent-color: var(--punch-violet-600); }
+.consent-row a { color: var(--punch-violet-300); text-decoration: underline; text-underline-offset: 2px; }

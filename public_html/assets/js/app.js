@@ -206,13 +206,71 @@
     });
   }
 
+  /* -------- Scroll ilerleme cubugu -------- */
+  function initScrollProgress() {
+    const bar = document.querySelector('.scroll-progress');
+    if (!bar) return;
+    const update = () => {
+      const st = window.scrollY;
+      const docH = document.documentElement.scrollHeight - window.innerHeight;
+      bar.style.width = (docH > 0 ? (st / docH) * 100 : 0) + '%';
+    };
+    update();
+    window.addEventListener('scroll', update, { passive: true });
+  }
+
+  /* -------- Preloader (intro) -------- */
+  function initPreloader() {
+    const pre = document.querySelector('.preloader');
+    if (!pre) return;
+    const done = () => { pre.classList.add('done'); document.body.classList.remove('loading'); };
+    // En az 450ms goster, en gec 2.2s'de kapan
+    const start = performance.now();
+    window.addEventListener('load', () => {
+      const wait = Math.max(0, 450 - (performance.now() - start));
+      setTimeout(done, wait);
+    });
+    setTimeout(done, 2200);
+  }
+
+  /* -------- Spotlight kartlar (imleci takip eden parlama) -------- */
+  function initSpotlight() {
+    if (reduceMotion) return;
+    document.querySelectorAll('.spotlight, .card').forEach((el) => {
+      el.classList.add('spotlight');
+      el.addEventListener('mousemove', (e) => {
+        const r = el.getBoundingClientRect();
+        el.style.setProperty('--mx', ((e.clientX - r.left) / r.width) * 100 + '%');
+        el.style.setProperty('--my', ((e.clientY - r.top) / r.height) * 100 + '%');
+      });
+    });
+  }
+
+  /* -------- Maske reveal (clip-path) -------- */
+  function initRevealMask() {
+    const els = document.querySelectorAll('[data-reveal-mask]');
+    if (!els.length) return;
+    if (reduceMotion || !('IntersectionObserver' in window)) {
+      els.forEach((el) => el.classList.add('is-revealed'));
+      return;
+    }
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((en) => { if (en.isIntersecting) { en.target.classList.add('is-revealed'); io.unobserve(en.target); } });
+    }, { threshold: 0.2 });
+    els.forEach((el) => io.observe(el));
+  }
+
   ready(function () {
+    initPreloader();
     initHeader();
     initLenis();
     initCursor();
     initMagnetic();
     initTilt();
     initScrollAnimations();
+    initScrollProgress();
+    initSpotlight();
+    initRevealMask();
     initFaq();
     initFilter();
     initCookies();

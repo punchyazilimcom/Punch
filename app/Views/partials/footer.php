@@ -60,11 +60,12 @@ $yt = setting('social_youtube', '');
         <div class="footer-bottom">
             <span>© <?= date('Y') ?> <?= e($app['name']) ?>. Tum haklari saklidir.</span>
             <div class="footer-links" style="flex-direction:row;flex-wrap:wrap;gap:var(--sp-4)">
+                <a href="/on-bilgilendirme-formu">On Bilgilendirme</a>
+                <a href="/mesafeli-satis-sozlesmesi">Mesafeli Satis</a>
+                <a href="/teslimat-ve-iade">Teslimat & Iade</a>
                 <a href="/kvkk">KVKK</a>
                 <a href="/gizlilik-politikasi">Gizlilik</a>
-                <a href="/mesafeli-satis-sozlesmesi">Mesafeli Satis</a>
                 <a href="/cerez-politikasi">Cerez Politikasi</a>
-                <a href="/teslimat-ve-iade">Teslimat & Iade</a>
             </div>
         </div>
     </div>

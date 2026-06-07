@@ -26,6 +26,12 @@ class PaymentController extends Controller
             $this->redirect('/paketler/' . $package['slug']);
         }
 
+        // Satin alma oncesi sozlesme onayi (sunucu tarafli zorunlu dogrulama)
+        if (!$request->bool('agree_preinfo') || !$request->bool('agree_sales')) {
+            $this->withError('Devam etmek icin On Bilgilendirme Formu ve Mesafeli Satis Sozlesmesi\'ni onaylamalisiniz.');
+            $this->redirect('/paketler/' . $package['slug']);
+        }
+
         // Rate limit
         $key = 'paytr:' . $user['id'];
         if (RateLimiter::tooManyAttempts($key, 8, 600)) {
@@ -53,6 +59,15 @@ class PaymentController extends Controller
             'currency'     => $package['currency'] ?: 'TRY',
             'status'       => 'pending',
         ]);
+
+        // Sozlesme onayini kayit altina al (ispat icin)
+        (new \App\Models\AuditLog())->record('user', (int) $user['id'], 'contract.accepted', [
+            'merchant_oid' => $merchantOid,
+            'package'      => $package['slug'],
+            'preinfo'      => true,
+            'sales'        => true,
+            'ts'           => date('c'),
+        ], $request->ip());
 
         $amountKurus = (int) round($amount * 100);
         $basket = [[$package['title'], number_format($amount, 2, '.', ''), 1]];

@@ -64,12 +64,14 @@ $faqs = $faqs ?: [];
     </div>
 
     <div class="card mb-5">
-        <h2 style="font-size:var(--fs-lg)" class="mb-4">Hukuki Metinler (HTML)</h2>
+        <h2 style="font-size:var(--fs-lg)" class="mb-2">Sozlesmeler & Hukuki Metinler (HTML)</h2>
+        <p class="text-muted text-sm mb-4">Asagidaki alanlar markaniza ozel hazir metinlerle dolu gelir. Diledigniz gibi duzenleyebilirsiniz; bos birakirsaniz hazir metin gosterilmeye devam eder.</p>
+        <div class="form-group"><label class="form-label">On Bilgilendirme Formu</label><textarea class="form-control" name="legal_preinfo" style="min-height:140px"><?= e($legal['preinfo']) ?></textarea></div>
+        <div class="form-group"><label class="form-label">Mesafeli Satis Sozlesmesi</label><textarea class="form-control" name="legal_sales" style="min-height:140px"><?= e($legal['sales']) ?></textarea></div>
+        <div class="form-group"><label class="form-label">Teslimat & Iade Kosullari</label><textarea class="form-control" name="legal_delivery" style="min-height:120px"><?= e($legal['delivery']) ?></textarea></div>
         <div class="form-group"><label class="form-label">KVKK Aydinlatma Metni</label><textarea class="form-control" name="legal_kvkk" style="min-height:120px"><?= e($legal['kvkk']) ?></textarea></div>
         <div class="form-group"><label class="form-label">Gizlilik Politikasi</label><textarea class="form-control" name="legal_privacy" style="min-height:120px"><?= e($legal['privacy']) ?></textarea></div>
-        <div class="form-group"><label class="form-label">Mesafeli Satis Sozlesmesi</label><textarea class="form-control" name="legal_sales" style="min-height:120px"><?= e($legal['sales']) ?></textarea></div>
         <div class="form-group"><label class="form-label">Cerez Politikasi</label><textarea class="form-control" name="legal_cookie" style="min-height:120px"><?= e($legal['cookie']) ?></textarea></div>
-        <div class="form-group"><label class="form-label">Teslimat & Iade</label><textarea class="form-control" name="legal_delivery" style="min-height:120px"><?= e($legal['delivery']) ?></textarea></div>
     </div>
 
     <button class="btn btn-lg">Tum Icerikleri Kaydet</button>

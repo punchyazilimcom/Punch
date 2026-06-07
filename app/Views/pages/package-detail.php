@@ -34,14 +34,28 @@ $loggedIn = Auth::check(Auth::GUARD_USER);
                 <div class="price"><?= price_format($package['price'], $package['currency']) ?></div>
                 <p class="text-muted text-xs mb-4">KDV dahildir · Guvenli odeme PayTR ile</p>
                 <?php if ($loggedIn): ?>
+                    <!-- Siparis ozeti -->
+                    <div class="order-summary mb-4">
+                        <div class="flex justify-between text-sm mb-2"><span class="text-muted">Paket</span><span class="text-bright"><?= e($package['title']) ?></span></div>
+                        <div class="flex justify-between text-sm mb-2"><span class="text-muted">KDV (%20 dahil)</span><span class="text-soft"><?= price_format(round((float)$package['price'] - (float)$package['price']/1.2, 2), $package['currency']) ?></span></div>
+                        <div class="flex justify-between" style="padding-top:8px;border-top:1px solid var(--line-1)"><strong class="text-bright">Genel Toplam</strong><strong class="text-accent"><?= price_format($package['price'], $package['currency']) ?></strong></div>
+                    </div>
                     <form action="/odeme/baslat/<?= e($package['slug']) ?>" method="post" data-guard>
                         <?= csrf_field() ?>
-                        <button type="submit" class="btn btn-block btn-lg">
+                        <label class="consent-row">
+                            <input type="checkbox" name="agree_preinfo" value="1" required>
+                            <span><a href="/on-bilgilendirme-formu" target="_blank" rel="noopener">On Bilgilendirme Formu</a>'nu okudum, onayliyorum.</span>
+                        </label>
+                        <label class="consent-row">
+                            <input type="checkbox" name="agree_sales" value="1" required>
+                            <span><a href="/mesafeli-satis-sozlesmesi" target="_blank" rel="noopener">Mesafeli Satis Sozlesmesi</a>'ni okudum, onayliyorum.</span>
+                        </label>
+                        <button type="submit" class="btn btn-block btn-lg btn-glow mt-4">
                             Guvenli Odeme ile Satin Al <?= $v->partial('partials/icon', ['name' => 'arrow-right', 'size' => 18]) ?>
                         </button>
                     </form>
                     <div class="flex items-center gap-2 mt-4 text-muted text-xs" style="justify-content:center">
-                        <?= $v->partial('partials/icon', ['name' => 'shield', 'size' => 16]) ?> 256-bit SSL korumali odeme
+                        <?= $v->partial('partials/icon', ['name' => 'shield', 'size' => 16]) ?> 256-bit SSL · 3D Secure · PayTR korumali odeme
                     </div>
                 <?php else: ?>
                     <a href="/giris" class="btn btn-block btn-lg">Satin almak icin giris yapin</a>
