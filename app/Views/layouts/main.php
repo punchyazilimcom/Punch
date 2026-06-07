@@ -50,6 +50,9 @@ $verification = setting('google_site_verification', $analytics['site_verificatio
     <link rel="stylesheet" href="<?= asset('css/components.css') ?>">
     <link rel="stylesheet" href="<?= asset('css/utilities.css') ?>">
 
+    <!-- JS yoksa animasyon baslangic durumlari icerigi gizlemesin -->
+    <noscript><style>[data-reveal],.hero [data-hero-fade]{opacity:1!important;transform:none!important}</style></noscript>
+
     <?= Seo::renderJsonLd($jsonld) ?>
 
     <?php if ($ga4): ?>
