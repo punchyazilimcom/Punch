@@ -11,10 +11,10 @@ $v = $__view;
     <div class="hero-orb hero-orb-2"></div>
     <div class="container">
         <div class="hero-inner">
-            <span class="eyebrow" data-hero-fade><?= e(setting('hero_eyebrow', 'Ankara · Dijital Yazilim Ajansi')) ?></span>
+            <span class="eyebrow" data-hero-fade><?= e(setting('hero_eyebrow', 'Ankara · Dijital Yazilim & Tasarim Ajansi')) ?></span>
             <h1 data-split>
                 <?php
-                $title = setting('hero_title', 'Dijitalde fark yaratan deneyimler tasarliyoruz');
+                $title = setting('hero_title', 'Markanizi dijitalde fark yaratan deneyimlere donusturuyoruz');
                 $words = preg_split('/\s+/', $title);
                 $mid = (int) floor(count($words) / 2);
                 foreach ($words as $i => $word):
@@ -24,7 +24,7 @@ $v = $__view;
                 <span class="reveal-word"><span class="<?= $cls ?>"><?= e($word) ?></span></span>
                 <?php endforeach; ?>
             </h1>
-            <p class="hero-lead" data-hero-fade><?= e(setting('hero_subtitle', 'Web tasarim, e-ticaret, sosyal medya ve ozel yazilim. Markanizi hizli, guvenli ve etkileyici dijital cozumlerle buyutuyoruz.')) ?></p>
+            <p class="hero-lead" data-hero-fade><?= e(setting('hero_subtitle', 'Sablon degil, size ozel. Hizli yuklenen, Google\'da one cikan ve satisa donusen web siteleri, e-ticaret altyapilari ve sosyal medya yonetimi. Stratejiden yayina kadar tek catida.')) ?></p>
             <div class="hero-cta" data-hero-fade>
                 <a href="/paketler" class="btn btn-lg btn-glow" data-magnetic="0.3">Paketleri Kesfet <?= $v->partial('partials/icon', ['name' => 'arrow-right', 'size' => 18]) ?></a>
                 <a href="/iletisim" class="btn btn-ghost btn-lg" data-magnetic="0.2">Ucretsiz Strateji Gorusmesi</a>
