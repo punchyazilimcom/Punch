@@ -1,0 +1,104 @@
+/* ============================================================
+   PUNCH YAZILIM — Tasarim Token'lari
+   Marka: koyu mor / siyah. (Canli siteden dogrulanmali; bkz. README)
+   Tum renkler buradan tek noktadan yonetilir.
+   ============================================================ */
+
+:root {
+  /* --- Marka renkleri --- */
+  --punch-violet-50:  #f4effe;
+  --punch-violet-100: #e6d9fd;
+  --punch-violet-200: #cbb0fb;
+  --punch-violet-300: #ad84f7;
+  --punch-violet-400: #9a64f4;
+  --punch-violet-500: #8b3dff;  /* accent / parlak mor */
+  --punch-violet-600: #7c3aed;  /* primary */
+  --punch-violet-700: #6d28d9;
+  --punch-violet-800: #581c87;
+  --punch-violet-900: #3b0a63;
+
+  --punch-magenta:    #c026d3;  /* ikincil vurgu (gradient karisimi) */
+
+  /* --- Zemin (near-black + mor ton) --- */
+  --bg-0:    #07040d;  /* en koyu */
+  --bg-1:    #0b0716;  /* ana arka plan */
+  --bg-2:    #110b20;  /* yukseltilmis yuzey */
+  --bg-3:    #181030;  /* kart */
+  --bg-glass: rgba(28, 18, 54, 0.55);
+
+  /* --- Metin --- */
+  --text-1:  #f6f3ff;  /* ana */
+  --text-2:  #cfc7e6;  /* ikincil */
+  --text-3:  #9a91b8;  /* sessiz / mute */
+  --text-on-accent: #ffffff;
+
+  /* --- Cizgi / kenar --- */
+  --line-1:  rgba(255, 255, 255, 0.08);
+  --line-2:  rgba(255, 255, 255, 0.14);
+  --line-glow: rgba(139, 61, 255, 0.45);
+
+  /* --- Anlamsal --- */
+  --success: #22c55e;
+  --warning: #f59e0b;
+  --danger:  #ef4444;
+  --info:    var(--punch-violet-400);
+
+  /* --- Vurgu kisayolu --- */
+  --primary: var(--punch-violet-600);
+  --accent:  var(--punch-violet-500);
+
+  /* --- Gradient'ler --- */
+  --grad-primary: linear-gradient(135deg, var(--punch-violet-600) 0%, var(--punch-magenta) 100%);
+  --grad-text:    linear-gradient(120deg, #ffffff 0%, var(--punch-violet-200) 40%, var(--punch-violet-400) 100%);
+  --grad-mesh:    radial-gradient(60% 60% at 20% 10%, rgba(124, 58, 237, 0.35) 0%, transparent 60%),
+                  radial-gradient(50% 50% at 85% 20%, rgba(192, 38, 211, 0.22) 0%, transparent 55%),
+                  radial-gradient(60% 60% at 70% 90%, rgba(139, 61, 255, 0.20) 0%, transparent 60%);
+
+  /* --- Tipografi --- */
+  --font-display: 'Clash Display', 'Satoshi', system-ui, sans-serif;
+  --font-sans: 'Inter', system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+
+  /* Akiskan tipografi olcegi (clamp) */
+  --fs-xs:   clamp(0.75rem, 0.72rem + 0.15vw, 0.82rem);
+  --fs-sm:   clamp(0.85rem, 0.82rem + 0.2vw, 0.94rem);
+  --fs-base: clamp(1rem, 0.96rem + 0.25vw, 1.1rem);
+  --fs-lg:   clamp(1.15rem, 1.05rem + 0.5vw, 1.4rem);
+  --fs-xl:   clamp(1.4rem, 1.2rem + 1vw, 2rem);
+  --fs-2xl:  clamp(1.9rem, 1.5rem + 2vw, 3rem);
+  --fs-3xl:  clamp(2.4rem, 1.7rem + 3.4vw, 4.5rem);
+  --fs-hero: clamp(2.8rem, 1.6rem + 6vw, 7rem);
+
+  --lh-tight: 1.05;
+  --lh-snug:  1.25;
+  --lh-base:  1.65;
+
+  /* --- Boslukluk (spacing scale) --- */
+  --sp-1: 0.25rem;  --sp-2: 0.5rem;   --sp-3: 0.75rem;  --sp-4: 1rem;
+  --sp-5: 1.5rem;   --sp-6: 2rem;     --sp-8: 3rem;     --sp-10: 4rem;
+  --sp-12: 6rem;    --sp-16: 8rem;    --sp-20: 10rem;
+
+  /* --- Yaricap --- */
+  --r-sm: 8px;  --r-md: 14px;  --r-lg: 22px;  --r-xl: 32px;  --r-full: 999px;
+
+  /* --- Golge --- */
+  --shadow-sm: 0 2px 8px rgba(0,0,0,0.3);
+  --shadow-md: 0 12px 40px rgba(0,0,0,0.45);
+  --shadow-glow: 0 0 0 1px var(--line-glow), 0 20px 60px rgba(124, 58, 237, 0.35);
+
+  /* --- Katmanlar --- */
+  --z-cursor: 9999;
+  --z-modal:  1000;
+  --z-header: 100;
+
+  /* --- Gecis --- */
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --dur-fast: 0.2s;
+  --dur-base: 0.4s;
+  --dur-slow: 0.8s;
+
+  /* --- Layout --- */
+  --container: 1240px;
+  --container-wide: 1440px;
+  --header-h: 76px;
+}
