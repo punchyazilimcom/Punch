@@ -71,9 +71,11 @@ $verification = setting('google_site_verification', $analytics['site_verificatio
 </head>
 <body class="<?= e($bodyClass) ?> loading">
     <div class="preloader" aria-hidden="true">
-        <div class="text-center">
+        <canvas class="preloader-canvas"></canvas>
+        <div class="text-center" style="position:relative;z-index:1">
             <div class="preloader-mark">Punch<span style="opacity:.6">.</span></div>
             <div class="preloader-bar mx-auto"></div>
+            <div class="preloader-status">evren hazirlaniyor…</div>
         </div>
     </div>
     <div class="scroll-progress" aria-hidden="true"></div>

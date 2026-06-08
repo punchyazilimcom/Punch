@@ -45,19 +45,52 @@
     ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
   }
 
+  function drawRing(cx, cy, R, half) {
+    const rx = R * 1.95, ry = R * 0.52, tilt = -0.32;
+    ctx.save();
+    ctx.translate(cx, cy); ctx.rotate(tilt);
+    if (half) { ctx.beginPath(); ctx.rect(-rx * 1.2, 0, rx * 2.4, ry * 1.4); ctx.clip(); } // sadece on (alt) yari
+    const g = ctx.createLinearGradient(-rx, 0, rx, 0);
+    g.addColorStop(0, 'rgba(124,58,237,0)');
+    g.addColorStop(0.3, 'rgba(173,132,247,0.55)');
+    g.addColorStop(0.5, 'rgba(54,224,214,0.6)');
+    g.addColorStop(0.7, 'rgba(255,95,209,0.5)');
+    g.addColorStop(1, 'rgba(124,58,237,0)');
+    ctx.strokeStyle = g; ctx.lineWidth = R * 0.12;
+    ctx.beginPath(); ctx.ellipse(0, 0, rx, ry, 0, 0, Math.PI * 2); ctx.stroke();
+    ctx.lineWidth = R * 0.04; ctx.globalAlpha = 0.6;
+    ctx.beginPath(); ctx.ellipse(0, 0, rx * 0.82, ry * 0.82, 0, 0, Math.PI * 2); ctx.stroke();
+    ctx.restore();
+  }
+
   function draw() {
     const W = canvas.clientWidth, H = canvas.clientHeight;
-    const R = Math.min(W, H) * 0.4;
+    const R = Math.min(W, H) * 0.32;
     const cx = W / 2, cy = H / 2;
     ctx.clearRect(0, 0, W, H);
 
     // atmosfer parlamasi
-    const atm = ctx.createRadialGradient(cx, cy, R * 0.7, cx, cy, R * 1.35);
+    const atm = ctx.createRadialGradient(cx, cy, R * 0.7, cx, cy, R * 1.5);
     atm.addColorStop(0, 'rgba(139,61,255,0.0)');
-    atm.addColorStop(0.6, 'rgba(139,61,255,0.25)');
+    atm.addColorStop(0.55, 'rgba(139,61,255,0.28)');
     atm.addColorStop(1, 'rgba(54,224,214,0.0)');
     ctx.fillStyle = atm;
-    ctx.beginPath(); ctx.arc(cx, cy, R * 1.35, 0, Math.PI * 2); ctx.fill();
+    ctx.beginPath(); ctx.arc(cx, cy, R * 1.5, 0, Math.PI * 2); ctx.fill();
+
+    // halka — arka yari (gezegenin arkasinda)
+    drawRing(cx, cy, R, false);
+
+    // uydu — gezegenin arkasindaysa once ciz
+    const ma = rot * 0.02;
+    const mx = cx + Math.cos(ma) * R * 2.2, my = cy + Math.sin(ma) * R * 0.8;
+    const moonBehind = Math.sin(ma) < 0;
+    const drawMoon = () => {
+      const mr = R * 0.13;
+      const mg = ctx.createRadialGradient(mx - mr * 0.3, my - mr * 0.3, 0, mx, my, mr);
+      mg.addColorStop(0, '#fff'); mg.addColorStop(0.6, '#c9b8f0'); mg.addColorStop(1, '#2a1b45');
+      ctx.fillStyle = mg; ctx.beginPath(); ctx.arc(mx, my, mr, 0, Math.PI * 2); ctx.fill();
+    };
+    if (moonBehind) drawMoon();
 
     // kure (clip) + donen doku
     ctx.save();
@@ -65,7 +98,6 @@
     const off = (rot % 512);
     ctx.drawImage(tex, cx - R - off, cy - R, R * 2, R * 2);
     ctx.drawImage(tex, cx - R - off + R * 2, cy - R, R * 2, R * 2);
-    // kuresel golgeleme (isik sol-ust)
     const sh = ctx.createRadialGradient(cx - R * 0.35, cy - R * 0.35, R * 0.1, cx, cy, R * 1.05);
     sh.addColorStop(0, 'rgba(255,255,255,0.22)');
     sh.addColorStop(0.5, 'rgba(0,0,0,0)');
@@ -75,7 +107,13 @@
 
     // ince kenar halkasi
     ctx.beginPath(); ctx.arc(cx, cy, R, 0, Math.PI * 2);
-    ctx.strokeStyle = 'rgba(173,132,247,0.4)'; ctx.lineWidth = 1.5; ctx.stroke();
+    ctx.strokeStyle = 'rgba(173,132,247,0.45)'; ctx.lineWidth = 1.5; ctx.stroke();
+
+    // halka — on yari (gezegenin onunde)
+    drawRing(cx, cy, R, true);
+
+    // uydu — onde ise
+    if (!moonBehind) drawMoon();
 
     if (!reduce) rot += 0.4;
     raf = requestAnimationFrame(draw);

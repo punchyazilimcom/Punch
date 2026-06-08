@@ -219,18 +219,70 @@
     window.addEventListener('scroll', update, { passive: true });
   }
 
-  /* -------- Preloader (intro) -------- */
+  /* -------- Hiperuzay preloader (warp tunnel intro) -------- */
   function initPreloader() {
     const pre = document.querySelector('.preloader');
     if (!pre) return;
-    const done = () => { pre.classList.add('done'); document.body.classList.remove('loading'); };
-    // En az 450ms goster, en gec 2.2s'de kapan
+    const finish = () => { pre.classList.add('done'); document.body.classList.remove('loading'); };
+    if (reduceMotion) { finish(); return; }
+
+    const cv = pre.querySelector('.preloader-canvas');
+    let boost = 0, closing = false, raf;
+    if (cv) {
+      const ctx = cv.getContext('2d');
+      let w, h, dpr, cx, cy, stars;
+      const resize = () => {
+        dpr = Math.min(devicePixelRatio || 1, 2);
+        w = innerWidth; h = innerHeight; cv.width = w * dpr; cv.height = h * dpr;
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0); cx = w / 2; cy = h / 2;
+      };
+      resize(); addEventListener('resize', resize);
+      stars = Array.from({ length: 260 }, () => ({ a: Math.random() * Math.PI * 2, r: Math.random() * 40, z: Math.random() }));
+      const COL = ['223,231,255', '173,132,247', '54,224,214', '255,95,209'];
+      (function loop() {
+        ctx.fillStyle = 'rgba(5,3,16,0.35)'; ctx.fillRect(0, 0, w, h);
+        ctx.globalCompositeOperation = 'lighter';
+        const sp = 1.6 + boost;
+        for (const s of stars) {
+          const pr = s.r;
+          s.r += (0.6 + s.r * 0.03) * sp;
+          const x0 = cx + Math.cos(s.a) * pr, y0 = cy + Math.sin(s.a) * pr;
+          const x1 = cx + Math.cos(s.a) * s.r, y1 = cy + Math.sin(s.a) * s.r;
+          ctx.strokeStyle = `rgba(${COL[(s.z * COL.length) | 0]},${Math.min(1, s.r / 240)})`;
+          ctx.lineWidth = Math.min(2.4, 0.4 + s.r / 160);
+          ctx.beginPath(); ctx.moveTo(x0, y0); ctx.lineTo(x1, y1); ctx.stroke();
+          if (s.r > Math.hypot(w, h) * 0.6) { s.r = Math.random() * 20; s.a = Math.random() * Math.PI * 2; }
+        }
+        ctx.globalCompositeOperation = 'source-over';
+        raf = requestAnimationFrame(loop);
+      })();
+    }
+
+    const close = () => {
+      if (closing) return; closing = true;
+      pre.classList.add('warp');
+      // hiperuzay sicramasi
+      let b = 0; const ramp = setInterval(() => { boost = (b += 1.4); if (b > 14) clearInterval(ramp); }, 16);
+      setTimeout(() => { cancelAnimationFrame(raf); finish(); }, 620);
+    };
     const start = performance.now();
-    window.addEventListener('load', () => {
-      const wait = Math.max(0, 450 - (performance.now() - start));
-      setTimeout(done, wait);
+    addEventListener('load', () => setTimeout(close, Math.max(0, 700 - (performance.now() - start))));
+    setTimeout(close, 2600); // guvenlik
+  }
+
+  /* -------- Hero derinlik parallax (fareyle 3D katman) -------- */
+  function initHeroParallax() {
+    if (reduceMotion) return;
+    const hero = document.querySelector('.hero');
+    const inner = document.querySelector('.hero .hero-inner');
+    if (!hero || !inner) return;
+    hero.addEventListener('mousemove', (e) => {
+      const r = hero.getBoundingClientRect();
+      const px = (e.clientX - r.left) / r.width - 0.5;
+      const py = (e.clientY - r.top) / r.height - 0.5;
+      inner.style.transform = `translate3d(${px * -18}px, ${py * -12}px, 0)`;
     });
-    setTimeout(done, 2200);
+    hero.addEventListener('mouseleave', () => { inner.style.transform = ''; });
   }
 
   /* -------- Spotlight kartlar (imleci takip eden parlama) -------- */
@@ -364,6 +416,7 @@
     initCursor();
     initCometTrail();
     initWarp();
+    initHeroParallax();
     initMagnetic();
     initTilt();
     initScrollAnimations();

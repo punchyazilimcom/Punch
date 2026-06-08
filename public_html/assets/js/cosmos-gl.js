@@ -30,6 +30,7 @@
     uniform float u_time;
     uniform vec2 u_mouse;     // 0..1
     uniform float u_mAmt;     // kara delik etkisi 0..1
+    uniform float u_pulse;    // tiklamadan bu yana gecen sn (yoksa buyuk)
 
     // hash & noise
     float hash(vec2 p){ p = fract(p*vec2(123.34,456.21)); p += dot(p, p+45.32); return fract(p.x*p.y); }
@@ -85,6 +86,15 @@
       col = mix(col, vec3(0.0), hole * u_mAmt);
       col += ring * u_mAmt * vec3(0.8,0.55,1.0) * 1.4;      // parlayan halka
 
+      // --- Supernova sok dalgasi (tiklamada) ---
+      if (u_pulse < 1.8) {
+        float rr = u_pulse * 0.85;
+        float ringp = exp(-pow((dist - rr) / 0.05, 2.0)) * (1.0 - u_pulse / 1.8);
+        col += ringp * vec3(1.0, 0.85, 1.0) * 2.6;
+        // merkezde kisa parlama
+        col += exp(-dist*8.0) * max(0.0, 0.4 - u_pulse) * vec3(0.9,0.7,1.0) * 3.0;
+      }
+
       // kenar karartma (vinyet)
       float vig = smoothstep(1.25, 0.2, length(uv-0.5));
       col *= vig;
@@ -118,10 +128,12 @@
   const uTime = gl.getUniformLocation(prog, 'u_time');
   const uMouse = gl.getUniformLocation(prog, 'u_mouse');
   const uMAmt = gl.getUniformLocation(prog, 'u_mAmt');
+  const uPulse = gl.getUniformLocation(prog, 'u_pulse');
 
   // performans icin 0.7x cozunurluk
   const SCALE = window.innerWidth < 768 ? 0.5 : 0.7;
   let mx = 0.5, my = 0.5, tmx = 0.5, tmy = 0.5, amt = 0, tamt = 0, raf, start = performance.now();
+  let pulseStart = -100;
 
   function resize() {
     const w = Math.max(1, (canvas.clientWidth * SCALE) | 0);
@@ -138,6 +150,7 @@
     gl.uniform1f(uTime, (performance.now() - start) / 1000);
     gl.uniform2f(uMouse, mx, my);
     gl.uniform1f(uMAmt, amt);
+    gl.uniform1f(uPulse, (performance.now() - pulseStart) / 1000);
     gl.drawArrays(gl.TRIANGLES, 0, 3);
     raf = requestAnimationFrame(render);
   }
@@ -151,6 +164,17 @@
     tamt = (tmx >= 0 && tmx <= 1 && tmy >= 0 && tmy <= 1) ? 1.0 : 0.0;
   }, { passive: true });
   window.addEventListener('mouseout', () => { tamt = 0.0; });
+  // Tiklamada supernova sok dalgasi (hero icinde)
+  if (hero) {
+    hero.addEventListener('pointerdown', (e) => {
+      if (e.target.closest('a, button, input, textarea, select, label')) return; // etkilesimli ogeleri bozma
+      const r = hero.getBoundingClientRect();
+      tmx = mx = (e.clientX - r.left) / r.width;
+      tmy = my = 1.0 - (e.clientY - r.top) / r.height;
+      tamt = 1.0;
+      pulseStart = performance.now();
+    });
+  }
   document.addEventListener('visibilitychange', () => {
     if (document.hidden) cancelAnimationFrame(raf); else render();
   });
