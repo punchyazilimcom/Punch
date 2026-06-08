@@ -32,5 +32,5 @@
 </section>
 <?php $__view->start('scripts'); ?>
 <script src="https://www.paytr.com/js/iframeResizer.min.js"></script>
-<script>try{iFrameResize({checkOrigin:false},'#paytriframe');}catch(e){}</script>
+<script nonce="<?= csp_nonce() ?>">try{iFrameResize({checkOrigin:false},'#paytriframe');}catch(e){}</script>
 <?php $__view->stop(); ?>

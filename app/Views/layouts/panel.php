@@ -66,7 +66,7 @@ $path = parse_url($_SERVER['REQUEST_URI'] ?? '/', PHP_URL_PATH);
         <?= $content ?>
     </main>
 </div>
-<script>
+<script nonce="<?= csp_nonce() ?>">
 (function(){
   var t=document.querySelector('[data-dash-toggle]'), c=document.querySelector('[data-dash-close]');
   if(t)t.addEventListener('click',function(){document.body.classList.toggle('dash-open');});

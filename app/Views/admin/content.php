@@ -77,7 +77,7 @@ $faqs = $faqs ?: [];
     <button class="btn btn-lg">Tum Icerikleri Kaydet</button>
 </form>
 
-<script>
+<script nonce="<?= csp_nonce() ?>">
 (function(){
   function add(container, html){ var d=document.createElement('div'); d.innerHTML=html; document.querySelector(container).appendChild(d.firstElementChild); }
   var tpl={

@@ -20,7 +20,7 @@ class Seo
             'canonical'   => self::currentUrl(),
             'og_image'    => App::config('app.url') . '/assets/img/og-default.svg',
             'og_type'     => 'website',
-            'robots'      => 'index, follow',
+            'robots'      => 'index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1',
             'jsonld'      => [],
         ];
         return array_merge($defaults, $overrides);
@@ -41,20 +41,41 @@ class Seo
     public static function organization(): array
     {
         $company = App::config('company');
-        return [
+        $data = [
             '@context' => 'https://schema.org',
             '@type'    => 'Organization',
             'name'     => $company['name'],
             'url'      => App::config('app.url'),
             'logo'     => App::config('app.url') . '/assets/img/logo.svg',
-            'email'    => $company['email'],
+            'email'    => setting('contact_email', $company['email']),
             'address'  => [
                 '@type'           => 'PostalAddress',
                 'addressLocality' => $company['city'],
                 'addressCountry'  => 'TR',
-                'streetAddress'   => $company['address'],
+                'streetAddress'   => setting('contact_address', $company['address']),
             ],
         ];
+        $phone = setting('contact_phone', $company['phone']);
+        if ($phone) {
+            $data['contactPoint'] = [
+                '@type'       => 'ContactPoint',
+                'telephone'   => $phone,
+                'contactType' => 'customer service',
+                'areaServed'  => 'TR',
+                'availableLanguage' => ['Turkish'],
+            ];
+        }
+        // Sosyal profiller (sameAs) — bilgi grafigi icin
+        $sameAs = array_values(array_filter([
+            setting('social_instagram', ''),
+            setting('social_linkedin', ''),
+            setting('social_x', ''),
+            setting('social_youtube', ''),
+        ]));
+        if ($sameAs) {
+            $data['sameAs'] = $sameAs;
+        }
+        return $data;
     }
 
     public static function localBusiness(): array

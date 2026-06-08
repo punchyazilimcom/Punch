@@ -65,6 +65,13 @@ DirectoryIndex index.php
 <FilesMatch "^(\.env.*|composer\.(json|lock)|package(-lock)?\.json|\.git.*)$">
     Require all denied
 </FilesMatch>
+# Hassas uzantilar (sql, log, md, lock, ini, yml, bak ...)
+<FilesMatch "\.(sql|log|md|lock|ini|ya?ml|bak|sh|dist|example)$">
+    Require all denied
+</FilesMatch>
+
+# Sunucu imzasini gizle
+ServerSignature Off
 
 # Ozel hata sayfalari front controller uzerinden
 ErrorDocument 404 /index.php

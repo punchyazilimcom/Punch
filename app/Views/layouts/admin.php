@@ -99,7 +99,7 @@ $nav = [
         <?= $content ?>
     </main>
 </div>
-<script>
+<script nonce="<?= csp_nonce() ?>">
 (function(){var t=document.querySelector('[data-dash-toggle]'),c=document.querySelector('[data-dash-close]');
 if(t)t.addEventListener('click',function(){document.body.classList.toggle('dash-open');});
 if(c)c.addEventListener('click',function(){document.body.classList.remove('dash-open');});})();

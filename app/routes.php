@@ -44,6 +44,7 @@ $router->get('/cerez-politikasi', 'App\Controllers\PageController@legal');
 
 // SEO
 $router->get('/sitemap.xml', 'App\Controllers\SitemapController@xml');
+$router->get('/feed.xml', 'App\Controllers\FeedController@rss');
 
 // ===================== AUTH (MUSTERI) =====================
 $router->group('', [], function (Router $r) {

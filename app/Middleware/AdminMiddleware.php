@@ -13,6 +13,10 @@ class AdminMiddleware
 {
     public function handle(Request $request): void
     {
+        if (!headers_sent()) {
+            header('X-Robots-Tag: noindex, nofollow');
+            header('Cache-Control: no-store, max-age=0');
+        }
         // IP allowlist (bos ise herkese acik)
         $allow = App::config('admin.ip_allowlist', []);
         if (!empty($allow) && !in_array($request->ip(), $allow, true)) {

@@ -44,6 +44,17 @@ class Response
         self::redirect($ref);
     }
 
+    private static ?string $nonce = null;
+
+    /** Istek basina bir kez uretilen CSP nonce'u (inline script'ler icin). */
+    public static function nonce(): string
+    {
+        if (self::$nonce === null) {
+            self::$nonce = base64_encode(random_bytes(16));
+        }
+        return self::$nonce;
+    }
+
     /**
      * Guvenlik basliklarini gonderir. CSP, PayTR iFrame ve GSAP/Lenis CDN'ine izin verir.
      */
@@ -57,15 +68,24 @@ class Response
         header('Referrer-Policy: strict-origin-when-cross-origin');
         header('Permissions-Policy: geolocation=(), microphone=(), camera=(), payment=(self "https://www.paytr.com")');
         header('X-XSS-Protection: 0');
+        header('X-Permitted-Cross-Domain-Policies: none');
+        header('Cross-Origin-Opener-Policy: same-origin');
+        header('Cross-Origin-Resource-Policy: same-origin');
+        // HTTPS'te HSTS (Apache de gonderir; cift gonderim zararsiz)
+        if (($_SERVER['HTTPS'] ?? '') === 'on' || ($_SERVER['HTTP_X_FORWARDED_PROTO'] ?? '') === 'https') {
+            header('Strict-Transport-Security: max-age=31536000; includeSubDomains; preload');
+        }
 
-        $self = "'self'";
+        $self  = "'self'";
+        $nonce = "'nonce-" . self::nonce() . "'";
         $csp = [
             "default-src {$self}",
             "base-uri {$self}",
             "object-src 'none'",
             "frame-ancestors {$self}",
-            // GSAP, Lenis, Splitting CDN'leri + inline init (nonce yerine pragmatik)
-            "script-src {$self} 'unsafe-inline' https://cdn.jsdelivr.net https://unpkg.com https://www.paytr.com https://www.googletagmanager.com https://www.google-analytics.com",
+            // Inline script YOK: yalniz nonce'lu inline + guvenilir CDN'ler (XSS sertlestirme)
+            "script-src {$self} {$nonce} https://cdn.jsdelivr.net https://unpkg.com https://www.paytr.com https://www.googletagmanager.com https://www.google-analytics.com",
+            // style: inline style attribute'lari icin unsafe-inline gerekli
             "style-src {$self} 'unsafe-inline' https://fonts.googleapis.com https://api.fontshare.com",
             "font-src {$self} https://fonts.gstatic.com https://api.fontshare.com data:",
             "img-src {$self} data: https: blob:",
@@ -73,6 +93,7 @@ class Response
             // PayTR odeme iFrame'i
             "frame-src {$self} https://www.paytr.com",
             "form-action {$self} https://www.paytr.com",
+            "upgrade-insecure-requests",
         ];
         header('Content-Security-Policy: ' . implode('; ', $csp));
     }

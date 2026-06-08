@@ -5,6 +5,14 @@ use App\Core\Csrf;
 use App\Core\Session;
 use App\Models\Setting;
 
+if (!function_exists('csp_nonce')) {
+    /** Mevcut istegin CSP nonce'u (inline <script nonce="..."> icin). */
+    function csp_nonce(): string
+    {
+        return \App\Core\Response::nonce();
+    }
+}
+
 if (!function_exists('setting')) {
     /** Veritabani key/value ayarindan deger okur (cache'li). */
     function setting(string $key, ?string $default = null): ?string

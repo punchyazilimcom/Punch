@@ -80,7 +80,7 @@ $yt = setting('social_youtube', '');
         </div>
     </div>
 </footer>
-<script>
+<script nonce="<?= csp_nonce() ?>">
 (function(){
   var sel=document.getElementById('perf-select'); if(!sel)return;
   try{ sel.value=localStorage.getItem('punch_perf')||'auto'; }catch(e){}

@@ -175,6 +175,11 @@ Seed verisiyle gelir (`database/seeds/001_seed.sql`):
 - [x] Güvenli session: `HttpOnly`, `Secure`, `SameSite`, login'de regenerate, mutlak timeout
 - [x] Argon2id parola hash + tek kullanımlık süreli şifre sıfırlama token'ı
 - [x] Dosya yükleme: MIME + boyut + uzantı doğrulama, web kökü dışı (ticket), yeniden adlandırma
+- [x] **Nonce tabanlı CSP** — script-src'de `'unsafe-inline'` YOK; her istekte üretilen nonce ile yalnız güvenilir inline + CDN (gerçek XSS sertleştirme)
+- [x] Ek başlıklar: Cross-Origin-Opener-Policy, Cross-Origin-Resource-Policy, X-Permitted-Cross-Domain-Policies, `upgrade-insecure-requests`
+- [x] Panel/Admin: `X-Robots-Tag: noindex` + `Cache-Control: no-store`
+- [x] `/.well-known/security.txt` (sorumlu açıklama iletişimi)
+- [x] `.htaccess`: `.sql/.log/.md/.lock/.ini/.yml/.bak/.example` uzantıları + nokta dosyaları engelli, ServerSignature off
 - [x] Güvenlik başlıkları: CSP (PayTR iFrame + GSAP/Lenis CDN izinli), X-Frame-Options, X-Content-Type-Options, Referrer-Policy, Permissions-Policy, HSTS
 - [x] `.env`/`vendor`/`app`/`config`/`storage` web'den erişime kapalı (`.htaccess` deny)
 - [x] Admin paneli ayrı login + opsiyonel IP allowlist + audit log
@@ -187,6 +192,9 @@ Seed verisiyle gelir (`database/seeds/001_seed.sql`):
 - [x] **JSON-LD:** Organization, ProfessionalService (LocalBusiness), WebSite+SearchAction, Service, Product/Offer, BlogPosting, BreadcrumbList, FAQPage
 - [x] Open Graph + Twitter Card (her sayfa, dinamik OG)
 - [x] Otomatik `/sitemap.xml` (sayfalar + blog + portfolyo + paketler, lastmod) + `robots.txt`
+- [x] **Blog RSS beslemesi** `/feed.xml` (RSS 2.0 + atom self-link)
+- [x] `hreflang` (tr + x-default), `max-image-preview:large, max-snippet:-1` robots direktifleri
+- [x] OG image width/height/alt; Organization JSON-LD'de `sameAs` (sosyal) + `contactPoint` (telefon)
 - [x] Core Web Vitals: görsel `width/height` (CLS), `loading=lazy`, font `display=swap` + preconnect, JS `defer`, uzun cache
 - [x] Tek `<h1>`, mantıklı `h2/h3` hiyerarşisi, anlamlı `alt`
 - [x] GA4 + Search Console doğrulama alanı (panelden, çerez onayına bağlı **consent mode**)

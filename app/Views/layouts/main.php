@@ -18,6 +18,10 @@ $verification = setting('google_site_verification', $analytics['site_verificatio
     <meta name="description" content="<?= e($seo['description']) ?>">
     <meta name="robots" content="<?= e($seo['robots']) ?>">
     <link rel="canonical" href="<?= e($seo['canonical']) ?>">
+    <link rel="alternate" hreflang="tr" href="<?= e($seo['canonical']) ?>">
+    <link rel="alternate" hreflang="x-default" href="<?= e($seo['canonical']) ?>">
+    <link rel="alternate" type="application/rss+xml" title="<?= e($app['name']) ?> — Blog" href="<?= base_url('feed.xml') ?>">
+    <link rel="sitemap" type="application/xml" href="<?= base_url('sitemap.xml') ?>">
     <?php if ($verification): ?><meta name="google-site-verification" content="<?= e($verification) ?>"><?php endif; ?>
 
     <!-- Open Graph -->
@@ -26,6 +30,9 @@ $verification = setting('google_site_verification', $analytics['site_verificatio
     <meta property="og:description" content="<?= e($seo['description']) ?>">
     <meta property="og:url" content="<?= e($seo['canonical']) ?>">
     <meta property="og:image" content="<?= e($seo['og_image']) ?>">
+    <meta property="og:image:width" content="1200">
+    <meta property="og:image:height" content="630">
+    <meta property="og:image:alt" content="<?= e($seo['title']) ?>">
     <meta property="og:site_name" content="<?= e($app['name']) ?>">
     <meta property="og:locale" content="tr_TR">
     <!-- Twitter -->
@@ -63,14 +70,14 @@ $verification = setting('google_site_verification', $analytics['site_verificatio
 
     <?php if ($ga4): ?>
     <!-- Google Analytics 4 (consent mode) -->
-    <script>
+    <script nonce="<?= csp_nonce() ?>">
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('consent', 'default', { 'analytics_storage': 'denied' });
       document.addEventListener('punch:consent', function(){ gtag('consent','update',{'analytics_storage':'granted'}); });
     </script>
     <script async src="https://www.googletagmanager.com/gtag/js?id=<?= e($ga4) ?>"></script>
-    <script>gtag('js', new Date()); gtag('config', '<?= e($ga4) ?>');</script>
+    <script nonce="<?= csp_nonce() ?>">gtag('js', new Date()); gtag('config', '<?= e($ga4) ?>');</script>
     <?php endif; ?>
 </head>
 <body class="<?= e($bodyClass) ?> loading">
