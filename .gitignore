@@ -29,3 +29,6 @@ Thumbs.db
 /coverage/
 /public_html/assets/uploads/*
 !/public_html/assets/uploads/.gitkeep
+
+# site-forge paket ciktilari
+/dist/
