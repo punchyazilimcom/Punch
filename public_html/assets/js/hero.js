@@ -12,14 +12,18 @@
   const canvas = document.getElementById('hero-canvas');
   if (!canvas) return;
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-  const lowPower = (navigator.hardwareConcurrency || 4) < 4;
+  // Kademeye gore yogunluk: off=0 (calismaz), low=0.4, medium=0.7, high=1
+  var P = window.PunchPerf;
+  var lvl = P ? P.level : ((navigator.hardwareConcurrency || 4) < 4 ? 1 : 3);
+  if (lvl < 1) return;
+  const dens = lvl >= 3 ? 1 : (lvl === 2 ? 0.7 : 0.4);
 
   const ctx = canvas.getContext('2d');
   let w, h, dpr, stars, nebula, swirl, shooters, raf, t = 0;
   const mouse = { x: 0, y: 0, tx: 0, ty: 0 };
   const cfg = {
-    stars: (window.innerWidth < 768 ? 140 : 320) * (lowPower ? 0.45 : 1) | 0,
-    swirl: (window.innerWidth < 768 ? 90 : 220) * (lowPower ? 0.5 : 1) | 0,
+    stars: (window.innerWidth < 768 ? 140 : 320) * dens | 0,
+    swirl: (window.innerWidth < 768 ? 90 : 220) * dens | 0,
   };
   const COL = ['223,231,255', '173,132,247', '54,224,214', '255,95,209'];
 

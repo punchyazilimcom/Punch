@@ -8,7 +8,10 @@
   'use strict';
   const canvas = document.getElementById('planet-canvas');
   if (!canvas) return;
-  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var P = window.PunchPerf;
+  // Dusuk/kapali kademede gezegen statik (donmez); orta+ doner
+  const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    || (P && !P.atLeast('medium'));
   const ctx = canvas.getContext('2d');
   let size, dpr, rot = 0, raf;
 
@@ -115,7 +118,8 @@
     // uydu — onde ise
     if (!moonBehind) drawMoon();
 
-    if (!reduce) rot += 0.4;
+    if (reduce) return;           // statik: tek kare ciz, donguyu baslatma
+    rot += 0.4;
     raf = requestAnimationFrame(draw);
   }
 

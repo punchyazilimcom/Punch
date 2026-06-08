@@ -44,6 +44,9 @@ $verification = setting('google_site_verification', $analytics['site_verificatio
     <link href="https://api.fontshare.com/v2/css?f[]=clash-display@600,500&f[]=satoshi@500&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 
+    <!-- Uyarlanabilir performans motoru: cihaza gore efekt kademesini ERKEN ayarlar (FOUC yok) -->
+    <script src="<?= asset('js/perf.js') ?>"></script>
+
     <!-- Tasarim sistemi -->
     <link rel="stylesheet" href="<?= asset('css/tokens.css') ?>">
     <link rel="stylesheet" href="<?= asset('css/base.css') ?>">
@@ -70,6 +73,7 @@ $verification = setting('google_site_verification', $analytics['site_verificatio
     <?php endif; ?>
 </head>
 <body class="<?= e($bodyClass) ?> loading">
+    <canvas id="cosmic-bg" aria-hidden="true"></canvas>
     <div class="preloader" aria-hidden="true">
         <canvas class="preloader-canvas"></canvas>
         <div class="text-center" style="position:relative;z-index:1">
@@ -95,6 +99,7 @@ $verification = setting('google_site_verification', $analytics['site_verificatio
     <script defer src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
     <script defer src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
     <script defer src="<?= asset('js/app.js') ?>"></script>
+    <script defer src="<?= asset('js/cosmic-bg.js') ?>"></script>
     <?php if (!empty($heroCanvas)): ?>
     <script defer src="<?= asset('js/cosmos-gl.js') ?>"></script>
     <script defer src="<?= asset('js/hero.js') ?>"></script>

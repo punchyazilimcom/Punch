@@ -67,9 +67,29 @@ $yt = setting('social_youtube', '');
                 <a href="/gizlilik-politikasi">Gizlilik</a>
                 <a href="/cerez-politikasi">Cerez Politikasi</a>
             </div>
+            <label class="perf-control" title="Gorsel efekt yogunlugu">
+                <span aria-hidden="true">✦</span> Efektler:
+                <select id="perf-select" aria-label="Gorsel efekt yogunlugu">
+                    <option value="auto">Otomatik</option>
+                    <option value="high">Yuksek</option>
+                    <option value="medium">Orta</option>
+                    <option value="low">Dusuk</option>
+                    <option value="off">Kapali</option>
+                </select>
+            </label>
         </div>
     </div>
 </footer>
+<script>
+(function(){
+  var sel=document.getElementById('perf-select'); if(!sel)return;
+  try{ sel.value=localStorage.getItem('punch_perf')||'auto'; }catch(e){}
+  sel.addEventListener('change',function(){
+    if(window.PunchPerf){ window.PunchPerf.set(sel.value); }
+    else { try{localStorage.setItem('punch_perf',sel.value);}catch(e){} location.reload(); }
+  });
+})();
+</script>
 
 <?php if ($wa): ?>
 <a class="wa-float" href="https://wa.me/<?= e(preg_replace('/\D/', '', $wa)) ?>" target="_blank" rel="noopener" aria-label="WhatsApp ile yazin">

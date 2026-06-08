@@ -153,3 +153,59 @@ body.warping .warp-streaks { opacity: 1; }
   background: radial-gradient(circle, rgba(124,58,237,0.18), transparent 60%);
   filter: blur(30px);
 }
+
+/* ============================================================
+   PERFORMANS KADEMELERI (html[data-perf]) — perf.js otomatik atar
+   high: tum efektler · medium: WebGL/site-arkasi kapali · low: sade · off: durgun
+   ============================================================ */
+
+/* Site geneli kozmik arka plan (yalniz yuksek) */
+#cosmic-bg { position: fixed; inset: 0; z-index: -10; pointer-events: none; display: none; }
+html[data-perf="high"] #cosmic-bg { display: block; }
+
+/* ORTA: WebGL nebula + site-arkasi yildiz alani kapali (2D hero & portal kalir) */
+html[data-perf="medium"] #nebula-gl,
+html[data-perf="medium"] #cosmic-bg { display: none; }
+
+/* DUSUK: agir GPU efektleri kapali, sade ama sik kalir */
+html[data-perf="low"] #nebula-gl,
+html[data-perf="low"] #hero-canvas,
+html[data-perf="low"] #cosmic-bg,
+html[data-perf="low"] .aurora,
+html[data-perf="low"] .grid-lines,
+html[data-perf="low"] .portal,
+html[data-perf="low"] .orbit-system,
+html[data-perf="low"] .warp-streaks,
+html[data-perf="low"] #comet-trail { display: none !important; }
+html[data-perf="low"] .card,
+html[data-perf="low"] .site-header.scrolled,
+html[data-perf="low"] .btn-glass { backdrop-filter: none !important; }
+html[data-perf="low"] .aurora span,
+html[data-perf="low"] .glow-border::before,
+html[data-perf="low"] .btn.btn-glow,
+html[data-perf="low"] .holo,
+html[data-perf="low"] .float-slow { animation: none !important; }
+html[data-perf="low"] .hero-orb { opacity: 0.3; filter: blur(50px); }
+
+/* KAPALI: yalniz durgun, sik bir koyu tema */
+html[data-perf="off"] #nebula-gl,
+html[data-perf="off"] #hero-canvas,
+html[data-perf="off"] #cosmic-bg,
+html[data-perf="off"] .aurora,
+html[data-perf="off"] .grid-lines,
+html[data-perf="off"] .portal,
+html[data-perf="off"] .orbit-system,
+html[data-perf="off"] .warp-streaks,
+html[data-perf="off"] #comet-trail,
+html[data-perf="off"] .preloader { display: none !important; }
+html[data-perf="off"] *, html[data-perf="off"] *::before, html[data-perf="off"] *::after { animation: none !important; }
+html[data-perf="off"] .card, html[data-perf="off"] .site-header.scrolled { backdrop-filter: none !important; }
+
+/* ---------- Efekt yogunlugu secici (footer) ---------- */
+.perf-control { display: inline-flex; align-items: center; gap: 6px; font-size: var(--fs-xs); color: var(--text-3); }
+.perf-control select {
+  background: rgba(255,255,255,0.04); color: var(--text-2);
+  border: 1px solid var(--line-2); border-radius: var(--r-full);
+  padding: 4px 10px; font-size: var(--fs-xs); cursor: pointer;
+}
+.perf-control select:focus { outline: none; border-color: var(--punch-violet-400); }

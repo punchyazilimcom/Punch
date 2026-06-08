@@ -315,6 +315,7 @@
   /* -------- Kuyruklu yildiz imleci izi (kozmik) -------- */
   function initCometTrail() {
     if (reduceMotion || window.matchMedia('(pointer: coarse)').matches) return;
+    if (window.PunchPerf && !window.PunchPerf.atLeast('medium')) return; // orta+ kademe
     const cv = document.createElement('canvas');
     cv.id = 'comet-trail';
     document.body.appendChild(cv);
@@ -365,6 +366,7 @@
   /* -------- Warp: hizli scroll'da yildiz cizgileri -------- */
   function initWarp() {
     if (reduceMotion) return;
+    if (window.PunchPerf && !window.PunchPerf.atLeast('high')) return; // yalniz yuksek
     const streaks = document.querySelector('.warp-streaks');
     if (!streaks) return;
     const ctx = streaks.getContext ? streaks.getContext('2d') : null;

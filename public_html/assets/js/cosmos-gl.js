@@ -10,7 +10,9 @@
   const canvas = document.getElementById('nebula-gl');
   if (!canvas) return;
   if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
-  if ((navigator.hardwareConcurrency || 4) < 4) return;
+  // Yalniz YUKSEK performans kademesinde WebGL nebula calisir
+  if (window.PunchPerf && !window.PunchPerf.atLeast('high')) return;
+  if (!window.PunchPerf && (navigator.hardwareConcurrency || 4) < 4) return;
 
   let gl;
   try {
@@ -177,5 +179,13 @@
   }
   document.addEventListener('visibilitychange', () => {
     if (document.hidden) cancelAnimationFrame(raf); else render();
+  });
+  // Performans kademesi dususe (FPS gozcusu) nebula'yi kapat
+  document.addEventListener('punch:downgrade', () => {
+    if (window.PunchPerf && !window.PunchPerf.atLeast('high')) {
+      cancelAnimationFrame(raf);
+      try { gl.clear(gl.COLOR_BUFFER_BIT); } catch (e) {}
+      canvas.style.display = 'none';
+    }
   });
 })();
