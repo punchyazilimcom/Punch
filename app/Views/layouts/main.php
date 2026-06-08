@@ -53,6 +53,7 @@ $verification = setting('google_site_verification', $analytics['site_verificatio
     <link rel="stylesheet" href="<?= asset('css/components.css') ?>">
     <link rel="stylesheet" href="<?= asset('css/effects.css') ?>">
     <link rel="stylesheet" href="<?= asset('css/cosmos.css') ?>">
+    <link rel="stylesheet" href="<?= asset('css/interactions.css') ?>">
     <link rel="stylesheet" href="<?= asset('css/utilities.css') ?>">
 
     <!-- JS yoksa animasyon baslangic durumlari icerigi gizlemesin -->
@@ -99,6 +100,7 @@ $verification = setting('google_site_verification', $analytics['site_verificatio
     <script defer src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
     <script defer src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
     <script defer src="<?= asset('js/app.js') ?>"></script>
+    <script defer src="<?= asset('js/interactions.js') ?>"></script>
     <script defer src="<?= asset('js/cosmic-bg.js') ?>"></script>
     <?php if (!empty($heroCanvas)): ?>
     <script defer src="<?= asset('js/cosmos-gl.js') ?>"></script>

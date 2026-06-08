@@ -34,6 +34,7 @@
   function initLenis() {
     if (reduceMotion || typeof window.Lenis === 'undefined') return null;
     const lenis = new window.Lenis({ lerp: 0.1, smoothWheel: true });
+    window.lenis = lenis;
     function raf(time) { lenis.raf(time); requestAnimationFrame(raf); }
     requestAnimationFrame(raf);
     if (hasGsap && window.ScrollTrigger) {

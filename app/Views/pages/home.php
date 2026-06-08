@@ -35,7 +35,7 @@ $v = $__view;
             </h1>
             <p class="hero-lead" data-hero-fade><?= e(setting('hero_subtitle', 'Sablon degil, size ozel. Hizli yuklenen, Google\'da one cikan ve satisa donusen web siteleri, e-ticaret altyapilari ve sosyal medya yonetimi. Stratejiden yayina kadar tek catida.')) ?></p>
             <div class="hero-cta" data-hero-fade>
-                <a href="/paketler" class="btn btn-lg btn-glow" data-magnetic="0.3">Paketleri Kesfet <?= $v->partial('partials/icon', ['name' => 'arrow-right', 'size' => 18]) ?></a>
+                <a href="/paketler" class="btn btn-lg btn-glow" data-magnetic="0.3" data-cursor="Kesfet">Paketleri Kesfet <?= $v->partial('partials/icon', ['name' => 'arrow-right', 'size' => 18]) ?></a>
                 <a href="/iletisim" class="btn btn-ghost btn-lg" data-magnetic="0.2">Ucretsiz Strateji Gorusmesi</a>
             </div>
             <div class="hero-cta" data-hero-fade style="margin-top:var(--sp-6);gap:var(--sp-3)">
@@ -62,7 +62,7 @@ $v = $__view;
         <div class="stat-grid">
             <?php foreach ($stats as $s): ?>
             <div class="stat" data-reveal>
-                <div class="stat-value"><?= e($s['value']) ?></div>
+                <div class="stat-value" data-countup="<?= e($s['value']) ?>"><?= e($s['value']) ?></div>
                 <div class="stat-label"><?= e($s['label']) ?></div>
             </div>
             <?php endforeach; ?>
@@ -76,7 +76,7 @@ $v = $__view;
     <div class="container">
         <header class="mb-8" data-reveal>
             <span class="eyebrow">Hizmetlerimiz</span>
-            <h2 class="section-title">Ucu uca dijital <span class="text-gradient">cozum ortaginiz</span></h2>
+            <h2 class="section-title" data-chars>Ucu uca dijital <span class="text-gradient">cozum ortaginiz</span></h2>
             <p class="section-lead">Stratejiden tasarima, yazilimdan buyumeye markanizi her asamada destekliyoruz.</p>
         </header>
         <div class="feature-grid">
@@ -100,7 +100,7 @@ $v = $__view;
     <div class="container">
         <header class="mb-8" data-reveal>
             <span class="eyebrow">Paketler</span>
-            <h2 class="section-title">Ihtiyaciniza gore <span class="text-gradient">net fiyatlar</span></h2>
+            <h2 class="section-title" data-chars>Ihtiyaciniza gore <span class="text-gradient">net fiyatlar</span></h2>
             <p class="section-lead">Sabit fiyatli paketleri online satin alin, ozel ihtiyaclar icin teklif isteyin.</p>
         </header>
         <div class="pricing-grid">
@@ -130,31 +130,34 @@ $v = $__view;
 </section>
 <?php endif; ?>
 
-<!-- ============ NASIL CALISIR ============ -->
-<section class="section">
-    <div class="container split">
-        <div data-reveal>
-            <span class="eyebrow">Surec</span>
-            <h2 class="section-title">Net, hizli ve <span class="text-gradient">seffaf</span> calisma</h2>
-            <p class="section-lead">Projeyi dort net adimda hayata geciriyoruz. Her asamada bilgilendirilirsiniz.</p>
-        </div>
-        <div class="steps">
-            <?php
-            $steps = [
-                ['Kesif & Strateji', 'Hedeflerinizi, hedef kitlenizi ve rakiplerinizi dinler; projeyi olculebilir is hedeflerine baglayan net bir yol haritasi cikaririz.'],
-                ['Tasarim', 'Markanizin ruhunu yansitan, ziyaretciyi aksiyona yonlendiren ozel arayuzler tasarlar; onayinizi adim adim aliriz.'],
-                ['Gelistirme', 'Hizli, guvenli ve SEO uyumlu kodlama ile tasarimi hayata geciririz; her cihazda ve her tarayicida titizlikle test ederiz.'],
-                ['Yayin & Buyume', 'Siteyi yayina alir, analitigi kurar; verilerle olcup surekli iyilestirerek markanizi buyutmeye devam ederiz.'],
-            ];
-            foreach ($steps as $i => $step): ?>
-            <div class="step card" data-reveal>
-                <div class="step-num"><?= sprintf('%02d', $i + 1) ?></div>
-                <div>
-                    <h3 style="font-size:var(--fs-lg)"><?= e($step[0]) ?></h3>
-                    <p class="text-soft text-sm mt-2"><?= e($step[1]) ?></p>
-                </div>
+<!-- ============ NASIL CALISIR (pinned storytelling) ============ -->
+<?php
+$steps = [
+    ['Kesif & Strateji', 'Hedeflerinizi, hedef kitlenizi ve rakiplerinizi dinler; projeyi olculebilir is hedeflerine baglayan net bir yol haritasi cikaririz.'],
+    ['Tasarim', 'Markanizin ruhunu yansitan, ziyaretciyi aksiyona yonlendiren ozel arayuzler tasarlar; onayinizi adim adim aliriz.'],
+    ['Gelistirme', 'Hizli, guvenli ve SEO uyumlu kodlama ile tasarimi hayata geciririz; her cihazda ve her tarayicida titizlikle test ederiz.'],
+    ['Yayin & Buyume', 'Siteyi yayina alir, analitigi kurar; verilerle olcup surekli iyilestirerek markanizi buyutmeye devam ederiz.'],
+];
+?>
+<section class="section story" data-story>
+    <div class="container">
+        <div class="story-grid">
+            <div class="story-sticky" data-story-sticky>
+                <span class="eyebrow">Surec</span>
+                <div class="story-num" data-story-num>01</div>
+                <div class="story-title" data-story-title><?= e($steps[0][0]) ?></div>
+                <p class="section-lead">Projeyi dort net adimda, seffaf bir sekilde hayata geciriyoruz. Asagi kaydirin, surece birlikte yolculuk edelim.</p>
+                <div class="story-progress"><div class="story-fill" data-story-fill></div></div>
             </div>
-            <?php endforeach; ?>
+            <div class="story-steps">
+                <?php foreach ($steps as $i => $step): ?>
+                <div class="story-step<?= $i === 0 ? ' active' : '' ?>" data-story-step data-step-title="<?= e($step[0]) ?>">
+                    <div class="section-index"><?= sprintf('%02d', $i + 1) ?> / <?= sprintf('%02d', count($steps)) ?></div>
+                    <h3 class="mt-3"><?= e($step[0]) ?></h3>
+                    <p class="text-soft"><?= e($step[1]) ?></p>
+                </div>
+                <?php endforeach; ?>
+            </div>
         </div>
     </div>
 </section>
@@ -206,25 +209,34 @@ $v = $__view;
 </section>
 <?php endif; ?>
 
-<!-- ============ YORUMLAR ============ -->
+<!-- ============ YORUMLAR (sinematik slider) ============ -->
 <?php if (!empty($testimonials)): ?>
 <section class="section">
-    <div class="container">
-        <header class="mb-8" data-reveal>
-            <span class="eyebrow">Musteri Yorumlari</span>
-            <h2 class="section-title">Bizimle calisanlar <span class="text-gradient">ne diyor?</span></h2>
+    <div class="container" style="max-width:900px">
+        <header class="text-center mb-8 mx-auto" data-reveal>
+            <span class="eyebrow mx-auto" style="justify-content:center">Musteri Yorumlari</span>
+            <h2 class="section-title mx-auto" data-chars style="max-width:none">Bizimle calisanlar <span class="text-gradient">ne diyor?</span></h2>
         </header>
-        <div class="grid-3">
-            <?php foreach ($testimonials as $t): ?>
-            <blockquote class="card testimonial" data-reveal>
-                <div class="stars"><?= str_repeat('★', (int)($t['rating'] ?? 5)) ?></div>
-                <p class="text-soft">“<?= e($t['text']) ?>”</p>
-                <div class="who">
-                    <strong><?= e($t['name']) ?></strong>
-                    <span><?= e($t['company'] ?? '') ?></span>
+        <div class="tslider" data-slider data-reveal>
+            <div class="tslider-track" data-slider-track>
+                <?php foreach ($testimonials as $t): ?>
+                <div class="tslide">
+                    <blockquote class="card cosmic text-center">
+                        <div class="stars" style="justify-content:center;display:flex"><?= str_repeat('★', (int)($t['rating'] ?? 5)) ?></div>
+                        <p class="text-bright mt-4">“<?= e($t['text']) ?>”</p>
+                        <div class="who mt-5" style="align-items:center">
+                            <strong class="text-accent"><?= e($t['name']) ?></strong>
+                            <span><?= e($t['company'] ?? '') ?></span>
+                        </div>
+                    </blockquote>
                 </div>
-            </blockquote>
-            <?php endforeach; ?>
+                <?php endforeach; ?>
+            </div>
+            <div class="slider-nav">
+                <button class="slider-btn" data-slider-prev aria-label="Onceki" data-cursor="Geri"><?= $v->partial('partials/icon', ['name' => 'arrow-right', 'size' => 18]) ?><span class="sr-only">Onceki</span></button>
+                <div class="slider-dots" data-slider-dots></div>
+                <button class="slider-btn" data-slider-next aria-label="Sonraki" data-cursor="Ileri"><?= $v->partial('partials/icon', ['name' => 'arrow-right', 'size' => 18]) ?></button>
+            </div>
         </div>
     </div>
 </section>
