@@ -1,0 +1,62 @@
+/* ============================================================
+   PUNCH YAZILIM — KURUMSAL TEMA KATMANI
+   Uzay/kozmik öğeleri kaldırır; sade, resmi, profesyonel görünüm.
+   En SON yüklenir; cosmos.css/effects.css üzerindeki uzaysal efektleri bastırır.
+   ============================================================ */
+
+/* --- Uzay/kozmik öğelerini tamamen kaldır --- */
+#nebula-gl, #hero-canvas, #cosmic-bg, #comet-trail, #planet-canvas,
+.aurora, .grid-lines, .portal, .orbit-system, .warp-streaks, .starfield-bg,
+.preloader-canvas, .hero::after { display: none !important; }
+
+/* Kozmik kart kenarı vurgularını sadeleştir */
+.card.cosmic::before { background: linear-gradient(140deg, rgba(99,102,241,.4), transparent 60%) !important; }
+
+/* --- Hareketli/parlak başlıkları sade, statik kurumsal aksana çevir --- */
+.holo, .text-gradient-anim {
+  background: linear-gradient(120deg, #fff 0%, var(--punch-violet-200) 50%, var(--punch-violet-400) 100%) !important;
+  background-size: 100% 100% !important;
+  -webkit-background-clip: text !important; background-clip: text !important; color: transparent !important;
+  animation: none !important; text-shadow: none !important;
+}
+/* CTA "glow" yanıp sönmesini durdur (kurumsal) */
+.btn.btn-glow { animation: none !important; box-shadow: 0 8px 24px rgba(49,46,129,.30) !important; }
+
+/* --- Zemin: hafif, profesyonel — derin uzay değil --- */
+body { background-color: var(--bg-1) !important; }
+body::before { background: var(--grad-mesh) !important; opacity: 1 !important; }
+body::after { opacity: .03 !important; } /* grain'i iyice azalt */
+
+/* --- Hero: sade kurumsal atmosfer (orb'lar yumuşak ve küçük) --- */
+.hero { min-height: 92svh; }
+.hero-orb { filter: blur(90px) !important; opacity: .28 !important; }
+.hero-orb-1 { width: 380px; height: 380px; background: radial-gradient(circle, var(--punch-violet-600), transparent 70%) !important; }
+.hero-orb-2 { width: 320px; height: 320px; background: radial-gradient(circle, var(--punch-violet-800), transparent 70%) !important; }
+.hero h1 { line-height: 1.04; }
+
+/* --- Preloader: sade, kurumsal (hiperuzay yok) --- */
+.preloader { background: var(--bg-1); }
+.preloader .preloader-status { display: none; }
+
+/* --- Kartlar: daha dingin, daha az parlama --- */
+.card::before { opacity: .35; }
+.card:hover { transform: translateY(-4px); }
+.glow-border::before { animation: none !important;
+  background: linear-gradient(140deg, var(--punch-violet-500), transparent 50%, var(--punch-violet-700)) !important; }
+
+/* --- "Kozmik gezegen" bölümünü kurumsal bloğa indir --- */
+.cosmic-planet .planet-wrap { min-height: 320px; border-radius: var(--r-lg); overflow: hidden;
+  background: linear-gradient(160deg, rgba(99,102,241,.14), rgba(67,56,202,.06)), var(--bg-2);
+  border: 1px solid var(--line-1); position: relative; }
+.cosmic-planet .planet-wrap::before {
+  content: ''; position: absolute; inset: 0;
+  background: radial-gradient(60% 60% at 30% 25%, rgba(99,102,241,.28), transparent 60%);
+}
+.cosmic-planet .planet-wrap::after { background: none !important; filter: none !important; }
+
+/* Marka logosu: düz indigo (mor neon değil) */
+.brand span[style*="punch-violet-400"] { color: var(--punch-violet-400) !important; }
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-orb { animation: none !important; }
+}

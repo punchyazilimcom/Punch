@@ -1,0 +1,90 @@
+/* ============================================================
+   PUNCH YAZILIM — Ust seviye etkilesim stilleri
+   Slider, pinned story, ripple, imlec etiketi, sayfa gecisi,
+   header autohide, yukari-cik dugmesi.
+   ============================================================ */
+
+/* ---------- Buton sok dalgasi ---------- */
+.btn { overflow: hidden; }
+.ripple {
+  position: absolute; border-radius: 50%; transform: scale(0);
+  background: rgba(255,255,255,0.35); pointer-events: none;
+  animation: rippleGo 0.65s var(--ease-out); mix-blend-mode: overlay;
+}
+@keyframes rippleGo { to { transform: scale(2.6); opacity: 0; } }
+
+/* ---------- Imlec etiketi ---------- */
+.cursor-ring .cursor-label {
+  position: absolute; inset: 0; display: grid; place-items: center;
+  font-size: 10px; font-weight: 600; color: #fff; opacity: 0;
+  text-transform: uppercase; letter-spacing: 0.08em; white-space: nowrap;
+}
+.cursor-ring.labeled { width: 84px; height: 84px; background: rgba(124,58,237,0.35); border-color: transparent; }
+.cursor-ring.labeled .cursor-label { opacity: 1; }
+
+/* ---------- Sayfa gecisleri ---------- */
+.page-enter #main { opacity: 0; transform: translateY(14px); }
+#main { transition: opacity 0.4s var(--ease-out), transform 0.4s var(--ease-out); }
+body.page-leave #main { opacity: 0; transform: translateY(-14px); }
+
+/* ---------- Header otomatik gizle ---------- */
+.site-header { transition: transform 0.4s var(--ease-out), background var(--dur-base), backdrop-filter var(--dur-base), border-color var(--dur-base); }
+.site-header.hide { transform: translateY(-100%); }
+
+/* ---------- Yukari cik dugmesi (ilerleme halkali) ---------- */
+.to-top {
+  position: fixed; right: 22px; bottom: 88px; z-index: var(--z-header);
+  width: 48px; height: 48px; border-radius: 50%; cursor: pointer;
+  background: var(--bg-2); border: 1px solid var(--line-2); color: var(--text-1);
+  display: grid; place-items: center; opacity: 0; transform: translateY(20px) scale(0.8);
+  transition: opacity 0.3s, transform 0.3s var(--ease-out); pointer-events: none;
+}
+.to-top.show { opacity: 1; transform: none; pointer-events: auto; }
+.to-top:hover { border-color: var(--punch-violet-400); box-shadow: 0 0 24px rgba(124,58,237,0.5); }
+.to-top > svg:last-child { width: 18px; height: 18px; position: relative; z-index: 1; }
+.to-top-ring { position: absolute; inset: 0; width: 48px; height: 48px; transform: rotate(-90deg); }
+.to-top-ring circle { fill: none; stroke: var(--punch-violet-500); stroke-width: 2.5; }
+
+/* ---------- Sinematik yorum slider ---------- */
+.tslider { position: relative; overflow: hidden; }
+.tslider-track { display: flex; transition: transform 0.7s var(--ease-out); will-change: transform; }
+.tslide { min-width: 100%; padding: var(--sp-2); }
+.tslide .card { transition: transform 0.6s var(--ease-out), opacity 0.6s; }
+.tslide:not(.is-active) .card { transform: scale(0.92); opacity: 0.5; }
+.tslide blockquote { font-size: var(--fs-xl); line-height: 1.4; }
+.slider-nav { display: flex; gap: var(--sp-3); align-items: center; justify-content: center; margin-top: var(--sp-6); }
+.slider-btn {
+  width: 48px; height: 48px; border-radius: 50%; cursor: pointer;
+  background: transparent; border: 1px solid var(--line-2); color: var(--text-1);
+  display: grid; place-items: center; transition: var(--dur-fast);
+}
+.slider-btn:hover { background: var(--punch-violet-600); border-color: transparent; transform: scale(1.08); }
+.slider-dots { display: flex; gap: 8px; }
+.slider-dot { width: 9px; height: 9px; border-radius: 50%; border: 0; cursor: pointer; background: var(--line-2); transition: var(--dur-fast); }
+.slider-dot.active { background: var(--punch-violet-500); width: 26px; border-radius: 5px; }
+
+/* ---------- Pinned storytelling ---------- */
+.story { position: relative; }
+.story-grid { display: grid; grid-template-columns: 1fr 1fr; gap: clamp(2rem,6vw,5rem); align-items: start; }
+.story-sticky { position: sticky; top: 0; min-height: 100svh; display: flex; flex-direction: column; justify-content: center; }
+.story-num { font-family: var(--font-display); font-size: clamp(6rem, 18vw, 14rem); line-height: 0.9;
+  background: var(--grad-text); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.story-title { font-size: var(--fs-2xl); margin-top: var(--sp-3); min-height: 1.4em; }
+.story-progress { width: 3px; background: var(--line-1); border-radius: 3px; height: 200px; margin-top: var(--sp-6); overflow: hidden; }
+.story-fill { width: 100%; height: 0; background: var(--grad-primary); }
+.story-steps { display: flex; flex-direction: column; gap: 0; }
+.story-step { padding: clamp(3rem,12vh,9rem) 0; border-left: 1px solid var(--line-1); padding-left: var(--sp-6); opacity: 0.35; transition: opacity 0.4s, border-color 0.4s; }
+.story-step.active { opacity: 1; border-color: var(--punch-violet-500); }
+.story-step h3 { font-size: var(--fs-xl); margin-bottom: var(--sp-3); }
+@media (max-width: 860px) {
+  .story-grid { grid-template-columns: 1fr; }
+  .story-sticky { position: relative; min-height: auto; margin-bottom: var(--sp-6); }
+  .story-step { padding: var(--sp-5) 0 var(--sp-5) var(--sp-5); opacity: 1; }
+}
+
+/* Dusuk kademede agir donusumler sade */
+html[data-perf="low"] .tslide:not(.is-active) .card,
+html[data-perf="off"] .tslide:not(.is-active) .card { transform: none; opacity: 1; }
+
+/* Slider prev butonu okunu ters cevir */
+.slider-btn[data-slider-prev] svg { transform: rotate(180deg); }

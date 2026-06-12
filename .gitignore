@@ -1,0 +1,34 @@
+# Dependencies
+/vendor/
+/node_modules/
+
+# Environment & secrets
+.env
+.env.local
+*.local.php
+
+# Build & runtime artifacts
+/storage/logs/*.log
+/storage/cache/*
+/storage/invoices/*.pdf
+/storage/uploads/*
+!/storage/logs/.gitkeep
+!/storage/cache/.gitkeep
+!/storage/invoices/.gitkeep
+!/storage/uploads/.gitkeep
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp
+
+# PHPUnit
+.phpunit.result.cache
+/coverage/
+/public_html/assets/uploads/*
+!/public_html/assets/uploads/.gitkeep
+
+# site-forge paket ciktilari
+/dist/
