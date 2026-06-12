@@ -16,6 +16,7 @@
     <link rel="stylesheet" href="<?= asset('css/cosmos.css') ?>">
     <link rel="stylesheet" href="<?= asset('css/interactions.css') ?>">
     <link rel="stylesheet" href="<?= asset('css/utilities.css') ?>">
+    <link rel="stylesheet" href="<?= asset('css/corporate.css') ?>">
 </head>
 <body>
     <main id="main" style="min-height:100svh;display:grid;place-items:center;text-align:center;padding:var(--sp-6)">

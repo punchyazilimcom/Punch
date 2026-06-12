@@ -28,6 +28,7 @@ $path = parse_url($_SERVER['REQUEST_URI'] ?? '/', PHP_URL_PATH);
     <link rel="stylesheet" href="<?= asset('css/components.css') ?>">
     <link rel="stylesheet" href="<?= asset('css/utilities.css') ?>">
     <link rel="stylesheet" href="<?= asset('css/dashboard.css') ?>">
+    <link rel="stylesheet" href="<?= asset('css/corporate.css') ?>">
 </head>
 <body>
 <div class="dash">

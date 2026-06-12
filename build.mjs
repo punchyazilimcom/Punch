@@ -41,7 +41,7 @@ for (const file of jsFiles) {
 }
 
 // --- CSS bundle + minify (token sirasini koru) ---
-const cssOrder = ['tokens.css', 'base.css', 'components.css', 'effects.css', 'cosmos.css', 'interactions.css', 'utilities.css', 'dashboard.css'];
+const cssOrder = ['tokens.css', 'base.css', 'components.css', 'effects.css', 'cosmos.css', 'interactions.css', 'utilities.css', 'corporate.css', 'dashboard.css'];
 let cssConcat = '';
 for (const f of cssOrder) {
   try {

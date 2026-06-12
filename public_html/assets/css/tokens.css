@@ -102,3 +102,25 @@
   --container-wide: 1440px;
   --header-h: 76px;
 }
+
+/* ============================================================
+   KURUMSAL TEMA OVERRIDE — profesyonel/resmi palet (uzay teması kaldırıldı)
+   Sofistike koyu slate + tek rafine indigo aksan. Neon/uzay renkleri yok.
+   ============================================================ */
+:root{
+  --bg-0:#090c11; --bg-1:#0d1117; --bg-2:#141a22; --bg-3:#1b222c;
+  --bg-glass:rgba(26,32,42,.6);
+  --punch-violet-50:#eef0fe; --punch-violet-100:#dde0fd; --punch-violet-200:#c7ccfb;
+  --punch-violet-300:#a8b0f7; --punch-violet-400:#818cf8; --punch-violet-500:#6366f1;
+  --punch-violet-600:#4f56e0; --punch-violet-700:#4338ca; --punch-violet-800:#312e81; --punch-violet-900:#1e1b4b;
+  --punch-magenta:#4338ca;            /* magenta yerine derin indigo (mono kurumsal) */
+  --text-1:#eef2f8; --text-2:#b3bcca; --text-3:#7d8799;
+  --line-1:rgba(255,255,255,.07); --line-2:rgba(255,255,255,.13); --line-glow:rgba(99,102,241,.35);
+  --primary:var(--punch-violet-600); --accent:var(--punch-violet-500);
+  --grad-primary:linear-gradient(135deg,#4f56e0,#6366f1);
+  --grad-text:linear-gradient(120deg,#ffffff 0%,#c7ccfb 45%,#818cf8 100%);
+  /* atmosfer: çok hafif, profesyonel — uzay mesh'i değil */
+  --grad-mesh:radial-gradient(70% 60% at 15% 0%,rgba(79,86,224,.16) 0%,transparent 60%),
+              radial-gradient(60% 50% at 100% 10%,rgba(67,56,202,.10) 0%,transparent 55%);
+  --shadow-glow:0 0 0 1px var(--line-glow), 0 18px 50px rgba(49,46,129,.30);
+}

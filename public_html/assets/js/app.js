@@ -417,8 +417,6 @@
     initHeader();
     initLenis();
     initCursor();
-    initCometTrail();
-    initWarp();
     initHeroParallax();
     initMagnetic();
     initTilt();

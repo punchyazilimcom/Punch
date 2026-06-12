@@ -57,6 +57,7 @@ $nav = [
     <link rel="stylesheet" href="<?= asset('css/components.css') ?>">
     <link rel="stylesheet" href="<?= asset('css/utilities.css') ?>">
     <link rel="stylesheet" href="<?= asset('css/dashboard.css') ?>">
+    <link rel="stylesheet" href="<?= asset('css/corporate.css') ?>">
 </head>
 <body>
 <div class="dash">

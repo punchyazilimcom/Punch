@@ -4,18 +4,6 @@ $v = $__view;
 ?>
 <!-- ============ HERO ============ -->
 <section class="hero">
-    <canvas id="nebula-gl" aria-hidden="true"></canvas>
-    <canvas id="hero-canvas" aria-hidden="true"></canvas>
-    <div class="aurora" aria-hidden="true"><span></span><span></span><span></span></div>
-    <div class="grid-lines" aria-hidden="true"></div>
-    <!-- Boyutsal portal -->
-    <div class="portal" aria-hidden="true"><span class="ring"></span><span class="ring"></span></div>
-    <!-- Yorungedeki gezegenler -->
-    <div class="orbit-system" aria-hidden="true">
-        <div class="orbit o1"><span class="planet"></span></div>
-        <div class="orbit o2"><span class="planet"></span></div>
-        <div class="orbit o3"><span class="planet"></span></div>
-    </div>
     <div class="hero-orb hero-orb-1"></div>
     <div class="hero-orb hero-orb-2"></div>
     <div class="container">
@@ -146,7 +134,7 @@ $steps = [
                 <span class="eyebrow">Surec</span>
                 <div class="story-num" data-story-num>01</div>
                 <div class="story-title" data-story-title><?= e($steps[0][0]) ?></div>
-                <p class="section-lead">Projeyi dort net adimda, seffaf bir sekilde hayata geciriyoruz. Asagi kaydirin, surece birlikte yolculuk edelim.</p>
+                <p class="section-lead">Projeyi dort net adimda, seffaf bir sekilde hayata geciriyoruz. Asagi kaydirin, sureci birlikte gorelim.</p>
                 <div class="story-progress"><div class="story-fill" data-story-fill></div></div>
             </div>
             <div class="story-steps">
@@ -162,23 +150,20 @@ $steps = [
     </div>
 </section>
 
-<!-- ============ KOZMIK / 3D GEZEGEN ============ -->
+<!-- ============ ÖLÇEKLENEBİLİR ALTYAPI ============ -->
 <section class="section cosmic-planet">
-    <div class="starfield-bg" aria-hidden="true"></div>
     <div class="container split">
-        <div class="planet-wrap float-slow" data-reveal>
-            <canvas id="planet-canvas" aria-hidden="true"></canvas>
-        </div>
+        <div class="planet-wrap" data-reveal></div>
         <div data-reveal>
-            <span class="section-index">Sinirsiz olcek</span>
-            <h2 class="section-title mt-3">Markaniz icin <span class="holo">kendi evreni</span></h2>
-            <p class="section-lead">Kurduğumuz dijital altyapilar; bugunku ihtiyaciniza degil, yarinki buyumenize gore tasarlanir. Trafik artsa da, urun sayisi katlansa da sisteminiz sarsilmadan olceklenir.</p>
+            <span class="section-index">Ölçeklenebilir altyapı</span>
+            <h2 class="section-title mt-3">Bugüne değil, <span class="text-gradient">yarına</span> göre kuruyoruz</h2>
+            <p class="section-lead">Kurduğumuz dijital altyapılar; bugünkü ihtiyacınıza değil, yarınki büyümenize göre tasarlanır. Trafik artsa da, ürün sayısı katlansa da sisteminiz sarsılmadan ölçeklenir.</p>
             <ul class="feature-list mt-5" style="max-width:46ch">
-                <li><?= $v->partial('partials/icon', ['name' => 'zap', 'size' => 18]) ?> <span>Saniyenin altinda acilan, CDN destekli hizli altyapi</span></li>
-                <li><?= $v->partial('partials/icon', ['name' => 'shield', 'size' => 18]) ?> <span>Kurumsal seviye guvenlik ve KVKK uyumu</span></li>
-                <li><?= $v->partial('partials/icon', ['name' => 'rocket', 'size' => 18]) ?> <span>Buyumeye hazir, modulleri eklenebilir mimari</span></li>
+                <li><?= $v->partial('partials/icon', ['name' => 'zap', 'size' => 18]) ?> <span>Saniyenin altında açılan, CDN destekli hızlı altyapı</span></li>
+                <li><?= $v->partial('partials/icon', ['name' => 'shield', 'size' => 18]) ?> <span>Kurumsal seviye güvenlik ve KVKK uyumu</span></li>
+                <li><?= $v->partial('partials/icon', ['name' => 'rocket', 'size' => 18]) ?> <span>Büyümeye hazır, modülleri eklenebilir mimari</span></li>
             </ul>
-            <a href="/iletisim" class="btn mt-6" data-magnetic="0.25">Yolculuga Baslayin <?= $v->partial('partials/icon', ['name' => 'arrow-right', 'size' => 18]) ?></a>
+            <a href="/iletisim" class="btn mt-6" data-magnetic="0.25">Hemen Başlayın <?= $v->partial('partials/icon', ['name' => 'arrow-right', 'size' => 18]) ?></a>
         </div>
     </div>
 </section>

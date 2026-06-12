@@ -62,6 +62,7 @@ $verification = setting('google_site_verification', $analytics['site_verificatio
     <link rel="stylesheet" href="<?= asset('css/cosmos.css') ?>">
     <link rel="stylesheet" href="<?= asset('css/interactions.css') ?>">
     <link rel="stylesheet" href="<?= asset('css/utilities.css') ?>">
+    <link rel="stylesheet" href="<?= asset('css/corporate.css') ?>">
 
     <!-- JS yoksa animasyon baslangic durumlari icerigi gizlemesin -->
     <noscript><style>[data-reveal],.hero [data-hero-fade]{opacity:1!important;transform:none!important}</style></noscript>
@@ -81,17 +82,13 @@ $verification = setting('google_site_verification', $analytics['site_verificatio
     <?php endif; ?>
 </head>
 <body class="<?= e($bodyClass) ?> loading">
-    <canvas id="cosmic-bg" aria-hidden="true"></canvas>
     <div class="preloader" aria-hidden="true">
-        <canvas class="preloader-canvas"></canvas>
         <div class="text-center" style="position:relative;z-index:1">
             <div class="preloader-mark">Punch<span style="opacity:.6">.</span></div>
             <div class="preloader-bar mx-auto"></div>
-            <div class="preloader-status">evren hazirlaniyor…</div>
         </div>
     </div>
     <div class="scroll-progress" aria-hidden="true"></div>
-    <canvas class="warp-streaks" aria-hidden="true"></canvas>
     <a class="skip-link" href="#main">Icerige gec</a>
     <?= $__view->partial('partials/header') ?>
 
@@ -108,12 +105,6 @@ $verification = setting('google_site_verification', $analytics['site_verificatio
     <script defer src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js"></script>
     <script defer src="<?= asset('js/app.js') ?>"></script>
     <script defer src="<?= asset('js/interactions.js') ?>"></script>
-    <script defer src="<?= asset('js/cosmic-bg.js') ?>"></script>
-    <?php if (!empty($heroCanvas)): ?>
-    <script defer src="<?= asset('js/cosmos-gl.js') ?>"></script>
-    <script defer src="<?= asset('js/hero.js') ?>"></script>
-    <script defer src="<?= asset('js/planet.js') ?>"></script>
-    <?php endif; ?>
     <?= $pageScripts ?? '' ?>
     <?= $__view->section('scripts') ?>
 </body>
